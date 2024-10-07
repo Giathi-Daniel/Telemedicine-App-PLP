@@ -1,1 +1,1 @@
-![desktop-preview](../client/design.png)
+![desktop-preview](\client\design.png)
