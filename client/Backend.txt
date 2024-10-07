@@ -1,0 +1,93 @@
+====== middleware/authMiddleware.js:
+// Middleware for Patient Authentication
+exports.isPatient = (req, res, next) => {
+  if (req.session && req.session.role === 'patient') {
+    return next();
+  }
+  return res.status(403).json({ error: 'Access denied. Patient access only.' });
+};
+
+// Middleware for Doctor Authentication
+exports.isDoctor = (req, res, next) => {
+  if (req.session && req.session.role === 'doctor') {
+    return next();
+  }
+  return res.status(403).json({ error: 'Access denied. Doctor access only.' });
+};
+
+// Middleware for Admin Authentication
+exports.isAdmin = (req, res, next) => {
+  if (req.session && req.session.role === 'admin') {
+    return next();
+  }
+  return res.status(403).json({ error: 'Access denied. Admin access only.' });
+};
+
+====== routes/appointmentRoutes.js:
+const { isPatient } = require('../middleware/authMiddleware');
+
+router.post('/', isPatient, createAppointment);                      // Only a logged-in patient can create an appointment
+router.get('/patient', isPatient, getAppointmentsByPatient);         // Only logged-in patients can view their appointments
+router.put('/:id', isPatient, updateAppointment);                    // Only logged-in patients can reschedule appointments
+router.delete('/:id', isPatient, deleteAppointment);                 // Only logged-in patients can cancel appointments
+
+====== routes/doctorRoutes.js
+const { isAdmin, isDoctor } = require('../middleware/authMiddleware');
+
+router.post('/', isAdmin, createDoctor);                             // Only admin can create a doctor
+router.get('/', getDoctors);                                         // Anyone can list all doctors
+router.get('/:id', getDoctorById);                                   // Anyone can view a specific doctor
+router.put('/:id', isDoctor, updateDoctor);                          // Only doctors can update their profile
+router.delete('/:id', isAdmin, deleteDoctor);                        // Only admin can delete a doctor
+
+===== routes
+router.post('/admin/create', isAdmin, createDoctor);
+router.delete('/admin/delete/:id', isAdmin, deleteDoctor);
+
+====== input validation
+npm install express-validator
+
+routes/doctorRoutes.js:
+const { check, validationResult } = require('express-validator');
+
+// Validation for Doctor
+const validateDoctor = [
+  check('first_name').not().isEmpty().withMessage('First name is required'),
+  check('last_name').not().isEmpty().withMessage('Last name is required'),
+  check('specialization').not().isEmpty().withMessage('Specialization is required'),
+  check('email').isEmail().withMessage('Valid email is required'),
+  check('phone').isMobilePhone().withMessage('Valid phone number is required'),
+  check('schedule').not().isEmpty().withMessage('Schedule is required'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  }
+];
+
+// Routes for doctors
+router.post('/', isAdmin, validateDoctor, createDoctor);  // Add validation for doctor creation
+router.put('/:id', isDoctor, validateDoctor, updateDoctor);  // Add validation for updating doctor info
+
+====== routes/appointmentRoutes.js:
+const { check, validationResult } = require('express-validator');
+
+// Validation for Appointment
+const validateAppointment = [
+  check('doctor_id').isNumeric().withMessage('Doctor ID must be a number'),
+  check('appointment_date').isISO8601().withMessage('Appointment date must be valid (YYYY-MM-DD)'),
+  check('appointment_time').matches(/^([0-1]\d|2[0-3]):([0-5]\d)$/).withMessage('Time must be in HH:MM format'),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    next();
+  }
+];
+
+// Routes for appointments
+router.post('/', isPatient, validateAppointment, createAppointment);  // Add validation for appointment creation
+router.put('/:id', isPatient, validateAppointment, updateAppointment);  // Add validation for appointment rescheduling

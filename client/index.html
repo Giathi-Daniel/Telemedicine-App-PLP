@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DocuCare</title>
+    <link rel="icon" type="image/png" href="./shield.png" />
+
+    <!-- ===== MONTSERRAT ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ===== LATO ===== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ===== FONT AWESOME ===== -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- ===== SWIPERJS ===== -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="general.css" />
+  </head>
+  <body>
+    <!-- ================== NAVIGATION ================== -->
+    <nav>
+      <div class="container nav__container">
+        <div class="logo">
+          <img src="./shield.png" alt="healthshield" />
+          <a href="#">DocuCare</a>
+        </div>
+
+        <ul class="nav__links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about-us">About Us</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+
+        <div class="nav__btns">
+          <a href="login.html" class="btns">login</a>
+          <a href="register.html" class="btns">Sign Up</a>
+        </div>
+
+        <div class="nav__menu">
+          <i class="fa-solid fa-bars" id="menuOpen"></i>
+          <i class="fa-regular fa-circle-xmark" id="menuClose"></i>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ================== HERO SECTION ================== -->
+    <section class="hero">
+      <div class="hero__background">
+        <img
+          class="hero__image"
+          src="https://cdn.pixabay.com/photo/2017/08/18/12/23/building-2654823_640.jpg"
+          alt="Background Image"
+        />
+        <video
+          class="hero__video"
+          autoplay
+          loop
+          muted
+          playsinline
+          poster="https://flatiron.com/hubfs/_2024Redesign/testing/dynamic-diamonds-placeholder.jpg"
+        >
+          <source
+            src="https://flatiron.com/hubfs/_2024Redesign/modules/home-hero/test%20ratio%205.mp4"
+            type="video/mp4"
+          />
+        </video>
+      </div>
+      <div class="hero__content">
+        <h1>Quality Healthcare at Your Fingertips</h1>
+        <p>
+          Experience seamless healthcare with our easy-to-use telemedicine
+          platform. Consult with top doctors from the comfort of your home. Our
+          24/7 service ensures you get the care you need, whenever you need it.
+          Safe, secure, and efficient healthcare is now just a click away.
+        </p>
+        <button type="button">Get Started</button>
+      </div>
+    </section>
+
+    <!-- ================== FEATURES SECTION ================== -->
+    <section class="features">
+      <div class="container features__container">
+        <div class="features__box">
+          <div class="features__icon">
+            <img
+              src="https://cdn.pixabay.com/photo/2022/02/02/23/26/doctor-6989582_1280.jpg"
+              alt="Book Appointments"
+            />
+          </div>
+          <h3>Book Appointments</h3>
+          <p>Easily schedule and manage your appointments with doctors.</p>
+        </div>
+        <div class="features__box">
+          <div class="features__icon">
+            <img
+              src="https://cdn.pixabay.com/photo/2016/01/19/15/05/computer-1149148_640.jpg"
+              alt="Chat with Doctors"
+            />
+          </div>
+          <h3>Chat with Doctors</h3>
+          <p>Instantly connect with medical professionals through chat.</p>
+        </div>
+        <div class="features__box">
+          <div class="features__icon">
+            <img
+              src="https://cdn.pixabay.com/photo/2020/11/03/15/31/doctor-5710152_640.jpg"
+              alt="Video Consultations"
+            />
+          </div>
+          <h3>Video Consultations</h3>
+          <p>Have face-to-face consultations with doctors via video calls.</p>
+        </div>
+        <div class="features__box">
+          <div class="features__icon">
+            <img
+              src="https://cdn.pixabay.com/photo/2014/12/10/20/48/laboratory-563423_640.jpg"
+              alt="Secure Medical Records"
+            />
+          </div>
+          <h3>Safe Records</h3>
+          <p>Access and manage your medical records securely online.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== SIDEBAR ================== -->
+    <aside class="sidebar">
+      <button class="sidebar__toggle">☰</button>
+      <div class="sidebar__search">
+        <input
+          type="text"
+          placeholder="Search doctors, services, or articles..."
+        />
+        <div class="search__icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
+
+      <div class="sidebar__links">
+        <a href="#doctor-search" class="sidebar__link">
+          <img
+            src="https://cdn.pixabay.com/photo/2017/01/29/21/16/nurse-2019420_640.jpg"
+            alt="Doctor Search"
+          />
+          Doctor Search
+        </a>
+        <a href="#consultation-history" class="sidebar__link">
+          <img
+            src="https://cdn.pixabay.com/photo/2015/07/10/20/54/stethoscope-840125_640.jpg"
+            alt="Consultation History"
+          />
+          Consultation
+        </a>
+        <a href="#health-tips" class="sidebar__link">
+          <img
+            src="https://cdn.pixabay.com/photo/2015/07/30/14/36/hypertension-867855_640.jpg"
+            alt="Health Tips"
+          />
+          Health Tips
+        </a>
+        <a href="#special-offers" class="sidebar__link">
+          <img
+            src="https://media.istockphoto.com/id/1063721368/photo/white-cubes-with-red-cross-concept-on-white-background.jpg?s=612x612&w=0&k=20&c=QSewHIHw0Lm1MpDrTXCzfCBm_D3Qb-pJ54ktauMeyn4="
+            alt="Special Offers"
+          />
+          Special Offers
+        </a>
+      </div>
+    </aside>
+
+    <!-- ================== SERVICES ================== -->
+    <section id="services">
+      <div class="container services__container">
+        <h1 class="title">
+          Our Services
+          <span class="underline"></span>
+        </h1>
+        <div class="services__grid">
+          <div class="service">
+            <img
+              src="https://up.yimg.com/ib/th?id=OIP.D_8Ofi77VYGoK4iJow-u-AHaHa&pid=Api&rs=1&c=1&qlt=95&w=124&h=124"
+              alt="Remote Monitoring"
+            />
+            <h3>Remote Monitoring</h3>
+            <p>
+              Track your health metrics such as heart rate and blood pressure in
+              real-time using our wearable devices and receive automatic updates
+              from your healthcare provider.
+            </p>
+          </div>
+
+          <div class="service">
+            <img
+              src="https://up.yimg.com/ib/th?id=OIP.2CKn3lxWdLCp2x83fAFEWgAAAA&pid=Api&rs=1&c=1&qlt=95&w=105&h=105"
+              alt="Lab Results"
+            />
+            <h3>View Lab Results</h3>
+            <p>
+              Get instant access to your lab test results directly from your
+              medical record. Stay informed about your health and share the
+              results with your doctors.
+            </p>
+          </div>
+
+          <div class="service">
+            <img
+              src="https://up.yimg.com/ib/th?id=OIP.uW_xFMT_9URPV48VuGgg0AHaHa&pid=Api&rs=1&c=1&qlt=95&w=109&h=109"
+              alt="Digital Prescriptions"
+            />
+            <h3>Digital Prescriptions</h3>
+            <p>
+              Receive and manage prescriptions online. Have your medications
+              delivered to your home or sent directly to your preferred pharmacy
+              for pick-up.
+            </p>
+          </div>
+
+          <div class="service">
+            <img
+              src="https://up.yimg.com/ib/th?id=OIP.cD3cABO129ASLehgejnStAHaHa&pid=Api&rs=1&c=1&qlt=95&w=121&h=121"
+              alt="Health Tracker"
+            />
+            <h3>Health Tracker</h3>
+            <p>
+              Use our comprehensive health tracker to monitor your daily
+              activities, nutrition, and sleep patterns, and receive
+              personalized recommendations from our AI-powered health assistant.
+            </p>
+          </div>
+        </div>
+
+        <button class="load-more-btn" id="loadMoreBtn">
+          Load More Services
+        </button>
+      </div>
+    </section>
+
+    <!-- ================== TESTIMONIALS ================== -->
+    <section id="testimonials" class="swiper-container">
+      <h1 class="title">What our users say <span class="underline"></span></h1>
+      <div class="swiper mySwiper">
+        <div class="container testimonials__container swiper-wrapper">
+          <div class="testimonial swiper-slide">
+            <p>
+              "The consultation was smooth and easy to use. Highly recommend!"
+            </p>
+            <small>- Jane Doe</small>
+            <img
+              src="https://cdn.pixabay.com/photo/2016/01/10/22/07/woman-1132617_640.jpg"
+              alt="Jane Doe"
+            />
+          </div>
+          <div class="testimonial swiper-slide">
+            <p>"A great platform for accessing quality healthcare services."</p>
+            <small>- Dr. John Smith</small>
+            <img
+              src="https://cdn.pixabay.com/photo/2016/10/03/23/02/man-1713125_640.jpg"
+              alt="Dr. John Smith"
+            />
+          </div>
+          <div class="testimonial swiper-slide">
+            <p>
+              "Booking appointments has never been easier. I love this app!"
+            </p>
+            <small>- Sarah Lee</small>
+            <img
+              src="https://up.yimg.com/ib/th?id=OIP.xWnnNdLTF7zZogjbA_j-SgHaHW&pid=Api&rs=1&c=1&qlt=95&w=106&h=106"
+              alt="Sarah Lee"
+            />
+          </div>
+          <div class="testimonial swiper-slide">
+            <p>
+              "As a doctor, this app helps me stay connected with my patients
+              seamlessly."
+            </p>
+            <small>- Dr. Emily White</small>
+            <img
+              src="https://cdn.pixabay.com/photo/2017/09/06/20/36/doctor-2722941_640.jpg"
+              alt="Dr. Emily White"
+            />
+          </div>
+          <div class="testimonial swiper-slide">
+            <p>
+              "This is a revolutionary platform for healthcare! So easy to use."
+            </p>
+            <small>- Mark Thompson</small>
+            <img
+              src="https://up.yimg.com/ib/th?id=OIP.GE6MMIFJI4DhvNk-7CngLQHaHe&pid=Api&rs=1&c=1&qlt=95&w=101&h=102"
+              alt="Mark Thompson"
+            />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <!-- ================== ABOUT US ================== -->
+    <section id="about-us">
+      <div class="container about__container">
+        <h1 class="title">About Us <span class="underline"></span></h1>
+
+        <div class="about__content">
+          <!-- Mission Section -->
+          <div class="about__mission">
+            <h2>Our Mission</h2>
+            <p>
+              At DocuCare, our mission is to revolutionize the way healthcare is
+              delivered by leveraging cutting-edge technology to bring quality
+              medical services directly to people’s homes. We strive to make
+              healthcare accessible, affordable, and efficient for everyone,
+              regardless of location. Our goal is to provide seamless access to
+              professional medical consultations, reduce the need for
+              unnecessary hospital visits, and offer personalized care through
+              telemedicine and remote health monitoring.
+            </p>
+          </div>
+
+          <!-- Vision Section -->
+          <div class="about__vision">
+            <h2>Our Vision</h2>
+            <p>
+              Our vision is to be the global leader in virtual healthcare,
+              providing every individual with timely access to expert medical
+              advice and care. We aim to create a future where healthcare knows
+              no boundaries, where individuals can consult with medical
+              professionals anytime, anywhere, without delays. We envision a
+              world where healthcare systems are more efficient, and patients
+              are empowered to take control of their health journey through
+              innovative technology and compassionate care.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== FOOTER ================== -->
+    <footer>
+      <div class="container footer__container">
+        <div class="company">
+          <div class="logo">
+            <img src="./shield.png" alt="healthshield" />
+            <a href="#">DocuCare</a>
+          </div>
+          <div class="address">
+            <p><i class="fa-solid fa-phone-alt"></i>+254 9430953434</p>
+            <p><i class="fa-solid fa-map"></i>Nairobi, Karen</p>
+            <p><i class="fa-solid fa-envelope"></i>telemed@gmail.com</p>
+            <p><i class="fa-solid fa-clock"></i>We are open 24/7</p>
+          </div>
+        </div>
+
+        <div class="quick__links">
+          <h3 class="footer__title">Quick Link</h3>
+          <div>
+            <a href="#">Home</a>
+            <a href="#services">Services</a>
+            <a href="#about-us">About Us</a>
+            <a href="#">Contact Us</a>
+          </div>
+        </div>
+
+        <div class="socials">
+          <h3 class="footer__title">Our Socials</h3>
+          <div>
+            <a href="#"><i class="fa-brands fa-facebook"></i>Facebook</a>
+            <a href="#"><i class="fa-brands fa-instagram"></i>Instagram</a>
+            <a href="#"><i class="fa-brands fa-linkedin"></i>LinkendIn</a>
+            <a href="#"><i class="fa-brands fa-twitter"></i>Twitter</a>
+          </div>
+        </div>
+
+        <div class="terms">
+          <h3 class="footer__title">Terms that apply</h3>
+          <div>
+            <a href="#">Terms and Conditions</a>
+            <a href="#">Our Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2024 <span class="cp">DocuCare</span>. All Rights Reserved</p>
+      </div>
+    </footer>
+
+    <!-- ===== SWIPERJS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- ===== JS ===== -->
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+/* ================== GENETAL STYLING ================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
+}
+
+
+:root {
+    --container-width-lg: 84%;
+    --container-width-md: 90%;
+    --container-width-sm: 94%;
+
+    --transition: all 400ms ease;
+
+    --color-primary: #4a90e2;
+    --color-secondary: #00c0a3;
+    --color-neutral: #f5f5f5;
+    --color-light: rgba(255, 255, 255, 1);
+    --color-warm: #f57c00;
+    --color-text: #333333;
+    --color-dark: #002b5c;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    line-height: 1.7;
+    color: var(--color-text);
+    background-color: var(--color-neutral);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Montserrat", sans-serif;
+    color: var(--color-text);
+}
+
+h1,
+h2 {
+    font-size: 1.685rem;
+}
+
+h3 {
+    font-size: 1.1rem;
+}
+
+a {
+    color: var(--color-text);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--color-warm);
+}
+
+button,
+a.btns {
+    font-size: 1.125rem;
+    color: var(--color-light);
+    background: var(--color-secondary);
+    transition: var(--transition);
+    border: none;
+    border-radius: .75rem;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    margin-inline-start: .5rem;
+}
+
+button:hover,
+.btns:hover {
+    background: var(--color-primary);
+}
+
+a.btns#logout {
+    background: red;
+    transition: var(--transition);
+}
+
+a.btns#logout:hover {
+    background: rgb(132, 0, 0);
+}
+
+.container {
+    inline-size: var(--container-width-lg);
+    margin: 0 auto;
+    max-inline-size: 2160px;
+}
+
+img {
+    inline-size: 100%;
+    object-fit: cover;
+}
+
+.section {
+    padding: 9rem 0;
+}
+
+/* ================== LOGO STYLING ================== */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    color: var(--color-warm);
+    font-weight: bold;
+}
+
+.logo img {
+    inline-size: 2rem;
+}

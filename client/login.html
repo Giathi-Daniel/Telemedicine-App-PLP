@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | DocuCare</title>
+    <link rel="stylesheet" href="auth.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Login to DocuCare</h1>
+      <div class="form-selection">
+        <img
+          src="https://up.yimg.com/ib/th?id=OIP.4ozGNYPrKcNyYGJuPh3NuAHaHa&pid=Api&rs=1&c=1&qlt=95&w=121&h=121"
+          alt="Patient"
+          id="patientImage"
+          class="profile-image"
+        />
+        <img
+          src="https://up.yimg.com/ib/th?id=OIP.D_8Ofi77VYGoK4iJow-u-AHaHa&pid=Api&rs=1&c=1&qlt=95&w=124&h=124"
+          alt="Doctor"
+          id="doctorImage"
+          class="profile-image"
+        />
+      </div>
+      <form id="loginForm">
+        <!-- Patient Form (Default) -->
+        <div id="patientForm">
+          <h2>Patient Login</h2>
+          <div class="input-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required />
+            <small id="emailError" class="error-message"></small>
+          </div>
+          <div class="input-group">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              minlength="6"
+            />
+            <small id="passwordError" class="error-message"></small>
+          </div>
+          <div class="input-group terms">
+            <input type="checkbox" id="rememberMe" name="rememberMe" />
+            <label for="rememberMe">Remember Me</label>
+          </div>
+          <button type="submit">Login</button>
+          <small id="loginError" class="error-message"></small>
+          <p>Don't have an account? <a href="register.html">Sign Up</a></p>
+        </div>
+
+        <!-- Doctor Form-->
+        <div id="doctorForm" style="display: none">
+          <h2>Doctor Login</h2>
+          <div class="input-group">
+            <label for="doctorEmail">Email:</label>
+            <input type="email" id="doctorEmail" name="doctorEmail" required />
+            <small id="doctorEmailError" class="error-message"></small>
+          </div>
+          <div class="input-group">
+            <label for="doctorPassword">Password:</label>
+            <input
+              type="password"
+              id="doctorPassword"
+              name="doctorPassword"
+              required
+              minlength="6"
+            />
+            <small id="doctorPasswordError" class="error-message"></small>
+          </div>
+          <div class="input-group">
+            <label for="profession">Profession:</label>
+            <input type="text" id="profession" name="profession" required />
+            <small id="professionError" class="error-message"></small>
+          </div>
+          <div class="input-group terms">
+            <input
+              type="checkbox"
+              id="doctorRememberMe"
+              name="doctorRememberMe"
+            />
+            <label for="doctorRememberMe">Remember Me</label>
+          </div>
+          <button type="submit">Login</button>
+          <small id="doctorLoginError" class="error-message"></small>
+          <p>Don't have an account? <a href="register.html">Sign Up</a></p>
+        </div>
+      </form>
+    </div>
+
+    <script src="login.js"></script>
+  </body>
+</html>
