@@ -1,0 +1,9 @@
+# Ignore environment variables file
+.env
+
+# Ignore other common files
+node_modules/
+dist/
+build/
+.DS_Store
+*.log
