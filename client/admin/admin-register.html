@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Docucare Admin Sign Up</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <header class="bg-blue-600 p-6 text-white text-center">
+      <h1 class="text-2xl font-bold">Docucare Admin Sign Up</h1>
+    </header>
+
+    <main class="container mx-auto mt-12">
+      <section class="max-w-md mx-auto bg-white p-8 shadow-md rounded-lg">
+        <h2 class="text-xl font-bold mb-6 text-center">Create Admin Account</h2>
+
+        <form action="/admin-register" method="POST">
+          <div class="mb-4">
+            <label for="name" class="block mb-2">Full Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="w-full px-4 py-2 border rounded-lg"
+              required
+            />
+          </div>
+
+          <div class="mb-4">
+            <label for="email" class="block mb-2">Email Address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="w-full px-4 py-2 border rounded-lg"
+              required
+            />
+          </div>
+
+          <div class="mb-4">
+            <label for="password" class="block mb-2">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="w-full px-4 py-2 border rounded-lg"
+              required
+            />
+          </div>
+
+          <div class="mb-6">
+            <label for="confirm-password" class="block mb-2"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              class="w-full px-4 py-2 border rounded-lg"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="bg-green-500 text-white w-full py-2 rounded-lg hover:bg-green-700"
+          >
+            Sign Up
+          </button>
+        </form>
+
+        <p class="mt-6 text-center">
+          Already have an account?
+          <a href="admin-login.html" class="text-blue-600 hover:underline"
+            >Login here</a
+          >.
+        </p>
+      </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center py-4 mt-12">
+      <p>&copy; 2024 Docucare. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
