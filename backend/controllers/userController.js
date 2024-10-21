@@ -50,7 +50,8 @@ exports.loginUser = async (req, res) => {
         req.session.name = user[0].name;
         req.session.email = user[0].email;
 
-        return res.status(200).json({ message: 'Successful login!' })
+        // return res.status(200).json({ message: 'Successful login!' })
+        res.redirect('/dashboard')
 
     } catch(err){
         console.error(err)
