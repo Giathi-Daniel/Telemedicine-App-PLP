@@ -2,8 +2,8 @@
 const db = require('./config/db') // database conn
 const express = require('express') // web server
 const bodyParser = require('body-parser') // capture form data
-const session = require('express-session') // session-management
-const MySQLStore = require('express-mysql-session')('session') // session-management storage
+const session = require('express-session');  // session-management
+const MySQLStore = require('express-mysql-session')(session); // session-management storage
 require('dotenv').config() // manage environment variables
 
 const app = express()
@@ -20,14 +20,14 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     store: sessionStore,
     resave: false,
-    saveuninitialized: false,
+    saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 // 1 hour
     }
 }))
 
 // routes
-app.use('/telemedicine/api/users', require('./routes/userRoutes'))
+// app.use('/telemedicine/api/users', require('./routes/userRoutes'))
 
 const PORT =  process.env.PORT || 3200
 
