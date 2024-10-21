@@ -42,7 +42,7 @@ document.getElementById('registerForm').addEventListener('submit', async(e) => {
     const result = await response.json()
 
     // chech status of the response
-    if(result.status === 201) {
+    if(response.status === 201) {
         showMessage('success', result.message)
     } else {
         showMessage('failed', result.message)
@@ -69,8 +69,9 @@ document.getElementById('loginForm').addEventListener('submit', async(e) => {
     const result = await response.json()
 
     // chech status of the response
-    if(result.status === 201) {
+    if(response.status === 200) {
         showMessage('success', result.message)
+        getUserDetails();
     } else {
         showMessage('failed', result.message)
     }
@@ -114,7 +115,7 @@ document.getElementById('editForm').addEventListener('submit', async(e) => {
     const result = await response.json()
 
     // chech status of the response
-    if(result.status === 200) {
+    if(response.status === 200) {
         showMessage('success', result.message)
         getUserDetails()
     } else {

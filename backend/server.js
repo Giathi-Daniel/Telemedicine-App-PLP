@@ -5,10 +5,12 @@ const bodyParser = require('body-parser') // capture form data
 const session = require('express-session');  // session-management
 const MySQLStore = require('express-mysql-session')(session); // session-management storage
 require('dotenv').config() // manage environment variables
+const path = require('path')
 
 const app = express()
 
 // middleware
+app.use(express.static(path.join(__dirname, '../client/test')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // capture form data
 
@@ -28,6 +30,11 @@ app.use(session({
 
 // routes
 app.use('/telemedicine/api/users', require('./routes/userRoutes.js'))
+
+// fetch for the html file
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/test', 'index.html'))
+})
 
 const PORT =  process.env.PORT || 3200
 

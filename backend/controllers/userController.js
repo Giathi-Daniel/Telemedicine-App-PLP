@@ -24,7 +24,7 @@ exports.registerUser = async (req, res) => {
         await db.execute('INSERT INTO users(name, email, password) VALUES (?,?,?)', [name, email, hashedPashword])
         return res.status(201).json({ message: 'New user registered successfully ' })
     } catch(err) {
-        cons.error(err)
+        console.error(err)
         return res.status(500).json({message: 'An error occurred during registration', error: err.message })
     }
 }
