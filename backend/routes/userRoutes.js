@@ -1,7 +1,7 @@
 const express = require('express')
 const { registerUser, loginUser, logoutUser, getUser, editUser } = require('../controllers/userController')
-const { check } = require('express-validator')
-const router = express.Router()
+const { check } = require('express-validator') // validation
+const router = express.Router() // directing requests
 
 // register route
 router.post(
