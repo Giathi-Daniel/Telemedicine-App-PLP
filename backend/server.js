@@ -23,8 +23,15 @@ app.use(session({
     saveuninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 // 1 hour
-
     }
 }))
 
-app.listen(3000, console.log('Server running'))
+// routes
+app.use('/telemedicine/api/users', require('./routes/userRoutes'))
+
+const PORT =  process.env.PORT || 3200
+
+// start server
+app.listen(PORT, () => {
+    console.log(`Server is running at ${PORT}`)
+})
