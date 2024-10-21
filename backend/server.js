@@ -27,7 +27,7 @@ app.use(session({
 }))
 
 // routes
-// app.use('/telemedicine/api/users', require('./routes/userRoutes'))
+app.use('/telemedicine/api/users', require('./routes/userRoutes.js'))
 
 const PORT =  process.env.PORT || 3200
 
