@@ -57,6 +57,20 @@ h3 {
     font-size: 1.3rem;
 }
 
+p {
+    margin-block: .7rem;
+}
+
+p>a {
+    text-decoration: underline;
+    transition: transform 0.1s ease;
+}
+
+p>a:hover {
+    transform: scale(1.1) !important;
+    color: #000;
+}
+
 .form__container>form {
     display: flex;
     flex-direction: column;
@@ -80,16 +94,17 @@ form>div>p {
     border: 1px solid #ccc;
     border-radius: .1rem;
     cursor: pointer;
-    transition: background all .3s;
+    transition: background all .3s ease;
 }
 
 #role-selection span:hover {
     background: var(--color-secondary);
+    color: var(--color-light);
 }
 
 #role-selection span.selected {
     background: var(--color-primary);
-    color: white;
+    color: var(--color-light);
 }
 
 .form__field div {
