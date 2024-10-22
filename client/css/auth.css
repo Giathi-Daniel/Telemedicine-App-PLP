@@ -1,27 +1,141 @@
 .register,
 .login {
-    margin-block-start: 10rem;
+    margin-block-start: 7rem;
     max-inline-size: 100%;
+    inline-size: 70%;
+    background: #fff;
+    block-size: auto;
+    padding: 1rem 1.2rem;
+    block-size: auto;
 }
 
-#role-selection {
+.register {
+    display: grid;
+    grid-template-columns: 30% auto;
+    gap: 2rem;
+}
+
+.register__image {
+    inline-size: 100%;
+    block-size: 100%;
+    display: block;
+}
+
+.register__image img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+}
+
+.register__container {
     display: flex;
-    justify-content: space-around;
-    cursor: pointer;
+    flex-direction: column;
+}
+
+h3 {
+    font-weight: bold;
+    margin-block-end: .5rem;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.register__container>form {
+    display: flex;
+    flex-direction: column;
+    inline-size: 100%;
+}
+
+form>div>p {
+    margin-block-end: .5rem;
+}
+
+.selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: .5rem;
+    margin-block-end: 1rem;
 }
 
 #role-selection span {
-    padding: 10px;
+    padding: .2rem 1rem;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: .1rem;
+    cursor: pointer;
+    transition: background all .3s;
 }
 
 #role-selection span:hover {
-    background-color: #f0f0f0;
+    background: var(--color-secondary);
 }
 
 #role-selection span.selected {
-    background-color: #007BFF;
+    background: var(--color-primary);
     color: white;
+}
+
+.form__field div {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin-inline: -.5rem;
+}
+
+input {
+    border: none;
+    outline: none;
+    background: #F1C59A;
+    padding: .5rem 1rem;
+    margin: .5rem;
+}
+
+input::placeholder {
+    color: #D1AA83;
+}
+
+select {
+    border: none;
+    outline: none;
+    background: #F1C59A;
+    padding: .5rem 1rem;
+    margin: .5rem;
+    color: #D1AA83;
+    inline-size: 50%;
+}
+
+#patient-fields {
+    flex-wrap: wrap;
+}
+
+#date_of_birth {
+    inline-size: 100%;
+    color: #D1AA83;
+}
+
+#patient-fields div {
+    display: flex;
+    inline-size: 100%;
+    align-items: center;
+    margin-inline: 0;
+}
+
+#specialty {
+    inline-size: 100%;
+}
+
+/* ===================== MEDIA QUERIES ===================== */
+/* ================ MEDIUM ================ */
+@media screen and (max-width: 768px) {
+
+    .register,
+    .login {
+        inline-size: 90%;
+    }
+
+    .register__image {
+        display: none;
+    }
+
+    .register {
+        display: block;
+    }
 }

@@ -12,9 +12,9 @@ span.addEventListener('click', function() {
     document.getElementById('provider-fields').style.display = 'none';
 
     if (selectedRole === 'patient') {
-    document.getElementById('patient-fields').style.display = 'block';
+    document.getElementById('patient-fields').style.display = 'flex';
     } else if (selectedRole === 'provider') {
-    document.getElementById('provider-fields').style.display = 'block';
+    document.getElementById('provider-fields').style.display = 'flex';
     }
 
     // Add the role to the form data (hidden input to send the role to the backend)
