@@ -2,7 +2,6 @@
 .login {
     margin-block-start: 7rem;
     max-inline-size: 100%;
-    inline-size: 70%;
     background: #fff;
     block-size: auto;
     padding: 1rem 1.2rem;
@@ -13,21 +12,40 @@
     display: grid;
     grid-template-columns: 30% auto;
     gap: 2rem;
+    inline-size: 70%;
 }
 
-.register__image {
-    inline-size: 100%;
-    block-size: 100%;
-    display: block;
+.login {
+    display: flex;
+    flex-direction: column;
+    inline-size: 30rem;
 }
 
-.register__image img {
+.login input {
     inline-size: 100%;
-    block-size: 100%;
+}
+
+.login .form__image {
+    inline-size: 100%;
+    block-size: 10rem;
+    border-radius: .7rem;
+}
+
+.form__image {
+    inline-size: 100%;
+    block-size: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.form__image img {
+    inline-size: 100%;
+    block-size: auto;
     object-fit: cover;
 }
 
-.register__container {
+.form__container {
     display: flex;
     flex-direction: column;
 }
@@ -39,7 +57,7 @@ h3 {
     font-size: 1.3rem;
 }
 
-.register__container>form {
+.form__container>form {
     display: flex;
     flex-direction: column;
     inline-size: 100%;
