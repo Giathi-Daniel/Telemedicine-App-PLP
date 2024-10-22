@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+  </head>
+  <body>
+    <div id="userSection" style="display: none">
+      <h3>User Information</h3>
+      <p><strong>Name: </strong><span id="userName"></span></p>
+      <p><strong>Email: </strong><span id="userEmail"></span></p>
+      <h3>Edit User Information</h3>
+      <form action="" id="editForm">
+        <label for="editFirstName">First Name:</label>
+        <input type="text" id="editName" />
+        <label for="editLastName">Last Name:</label>
+        <input type="text" id="editLastName" />
+        <label for="editLanguage">Language:</label>
+        <input type="text" id="editLanguage" />
+        <label for="editPassword">Password:</label>
+        <input type="password" id="editPassword" />
+        <button type="submit">Update</button>
+        <button type="reset">Cancel</button>
+      </form>
+      <button type="submit" id="logoutButton">Logout</button>
+    </div>
+
+    <script src="doctor.js"></script>
+  </body>
+</html>
