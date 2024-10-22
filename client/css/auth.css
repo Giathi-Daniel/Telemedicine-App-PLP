@@ -1,165 +1,27 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #f7f9fc, #e2e2e2);
-    margin: 0;
-    padding: 0;
+.register,
+.login {
+    margin-block-start: 10rem;
+    max-inline-size: 100%;
+}
+
+#role-selection {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    block-size: 100vh;
-}
-
-.container {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    max-inline-size: 500px;
-    inline-size: 100%;
-    margin-block: 10rem 0;
-}
-
-h1,
-h2 {
-    color: #333;
-    margin: 0;
-    text-align: center;
-}
-
-h2 {
-    color: #007bff;
-    margin-block-end: 20px;
-}
-
-.form-selection {
-    display: flex;
-    justify-content: center;
-    margin-block-end: 20px;
-}
-
-.profile-image {
+    justify-content: space-around;
     cursor: pointer;
-    border-radius: 50%;
-    inline-size: 100px;
-    block-size: 100px;
-    object-fit: cover;
-    margin: 0 15px;
-    transition: transform 0.3s;
 }
 
-.profile-image:hover {
-    transform: scale(1.1);
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    /* padding-inline: 1rem; */
-}
-
-.form-step {
-    display: none;
-}
-
-.form-step.active {
-    display: block;
-}
-
-.flex {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.input-group {
-    margin-block-end: 15px;
-}
-
-.input-group label {
-    display: block;
-    font-weight: bold;
-    color: #333;
-}
-
-.input-group input {
-    inline-size: 95%;
+#role-selection span {
     padding: 10px;
+    font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 4px;
 }
 
-.input-group input:focus {
-    border-color: #007bff;
-    outline: none;
+#role-selection span:hover {
+    background-color: #f0f0f0;
 }
 
-.input-group small {
-    color: red;
-    display: block;
-    margin-block-start: 5px;
-}
-
-.terms {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: start;
-    margin-inline-start: -11rem;
-}
-
-.terms label {
-    inline-size: 100%;
-    margin-inline-start: -10rem;
-}
-
-button {
-    background-color: #007bff;
+#role-selection span.selected {
+    background-color: #007BFF;
     color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    inline-size: 100%;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-p {
-    text-align: center;
-}
-
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-#passwordStrength,
-#passwordStrengthDoctor {
-    text-align: start;
-}
-
-#passwordStrength p {
-    text-align: start;
-    margin-block-end: 1rem;
-}
-
-progress {
-    inline-size: 100%;
-    block-size: 8px;
-    border-radius: 5px;
-}
-
-#togglePassword,
-#togglePasswordDoctor {
-    cursor: pointer;
-    margin-inline-start: 5px;
 }
