@@ -11,15 +11,7 @@ exports.registerUser = async (req, res) => {
     }
 
     // fetch input parameters from the body
-    const { first_name, last_name, email, password, role, date_of_birth, language, gender } = req.body
-
-    if (role === 'patient') {
-        existingUser = await Patient.findOne({ where: { email } });
-    } else if (role === 'provider') {
-    existingUser = await Provider.findOne({ where: { email } });
-    } else if (role === 'admin') {
-    existingUser = await Admin.findOne({ where: { email } });
-    }
+    const { first_name, last_name, email, password, date_of_birth, language, gender } = req.body
 
     try {
         const [user] = await db.execute('SELECT email FROM patients WHERE email = ?', [email])
@@ -29,7 +21,7 @@ exports.registerUser = async (req, res) => {
 
         // prepare our data
         const hashedPashword = await bcrypt.hash(password, 18)
-        await db.execute('INSERT INTO patients(first_name, last_name, email, password, role, date_of_birth, language, gender, password) VALUES (?,?,?,?,?,?,?,?,?)', [first_name, last_name, email, role, date_of_birth, language, gender, hashedPashword])
+        await db.execute('INSERT INTO patients(first_name, last_name, email, password,date_of_birth, language, gender, password) VALUES (?,?,?,?,?,?,?,?,?)', [first_name, last_name, email, date_of_birth, language, gender, hashedPashword])
         return res.status(201).json({ message: 'New user registered successfully ' })
     } catch(err) {
         console.error(err)
@@ -42,7 +34,7 @@ exports.loginUser = async (req, res) => {
     const { email, password } = req.body
 
     try {
-        const [user] = await db.execute('SELECT * FROM users WHERE email = ?', [email])
+        const [user] = await db.execute('SELECT * FROM patients WHERE email = ?', [email])
         if(user.length === 0) {
             return res.status(404).json({ message: 'The user does not exist' });
         }

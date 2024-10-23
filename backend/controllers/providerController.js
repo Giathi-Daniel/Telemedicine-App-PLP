@@ -2,7 +2,7 @@ const db = require('../config/db')
 const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator')
 
-// register user
+// register provider
 exports.registerProvider = async (req, res) => {
     const errors = validationResult(req) 
 
@@ -10,12 +10,12 @@ exports.registerProvider = async (req, res) => {
         return res.status(400).json({ message: 'Please correct input errors', errors: errors.array() })
     }
 
-    const { first_name, last_name, provider_specialty, email, password,phone_number } = req.body
+    const { first_name, last_name, provider_specialty, email, password, phone_number } = req.body
 
     try {
         const [provider] = await db.execute('SELECT email FROM providers WHERE email = ?', [email])
         if(provider.length > 0) {
-            return res.status(404).json({ message: 'The user already exists' });
+            return res.status(404).json({ message: 'The provider already exists' });
         }
 
         const hashedPashword = await bcrypt.hash(password, 18)
@@ -32,19 +32,19 @@ exports.loginProvider = async (req, res) => {
     const { email, password } = req.body
 
     try {
-        const [provider] = await db.execute('SELECT * FROM users WHERE email = ?', [email])
+        const [provider] = await db.execute('SELECT * FROM providers WHERE email = ?', [email])
         if(provider.length === 0) {
-            return res.status(404).json({ message: 'The user does not exist' });
+            return res.status(404).json({ message: 'The provider does not exist' });
         }
 
-        const isMatch = await bcrypt.compare(password, user[0].password)
+        const isMatch = await bcrypt.compare(password, provider[0].password)
 
         if(!isMatch) {
             return res.status(400).json({ message: 'Invalid email/passowrd combination.' })
         }
 
         // create session
-        req.session.userId = provider[0].id;
+        req.session.providerId = provider[0].id;
         req.session.email = provider[0].email;
 
         res.redirect('/dashboard')
@@ -68,20 +68,20 @@ exports.logoutProvider = async (req, res) => {
     )
 }
 
-// get user info
+// get provider info
 exports.getProvider = async (req, res) => {
     if(!req.session.providerId) {
         return res.status(401).json({ message: 'Unauthorized. Please log in' })
     }
 
     try {
-        const [user] = db.execute('SELECT name, email FROM users WHERE email = ?', [email])
-        if(user.length === 0) {
-            return res.status(404).json({ message: 'The user does not exist' });
+        const [provider] = db.execute('SELECT first_name, last_name, provder_specialty, email FROM providers WHERE email = ?', [email])
+        if(provider.length === 0) {
+            return res.status(404).json({ message: 'The provider does not exist' });
         }
 
 
-        return res.status(200).json({ message: 'Details fetched for editing!', user: user[0] })
+        return res.status(200).json({ message: 'Details fetched for editing!', provider: provider[0] })
 
     } catch(err){
         console.error(err)
@@ -89,10 +89,10 @@ exports.getProvider = async (req, res) => {
     }
 }
 
-// edit user
+// edit provider
 exports.editProvider = async (req, res) => {
-    // check if the user is logged in
-    if(!req.session.userId) {
+    // check if the provider is logged in
+    if(!req.session.providerId) {
         return res.status(401).json({ message: 'Unauthorized. Please login to continue.' })
     }
 
@@ -101,13 +101,11 @@ exports.editProvider = async (req, res) => {
         return res.status(400).json({ message: 'Please correct input errors', errors: errors.array() })
     }
 
-    const { name, email, password } = req.body 
-
-    const hashedPashword = await bcrypt.hash(password, 18)
+    const { first_name, last_name, provider_specialty, email, phone_number } = req.body 
     
     try {
-        await db.execute('UPDATE users SET name = ?, email = ?, password = ? WHERE id = ?', [name, email, hashedPashword, req.session.userId])
-        return res.status(200).json({ message: 'User details updated successfully' })
+        await db.execute('UPDATE providers SET first_name = ?, last_name = ?, provider_specialty = ?, email = ?, phone_number = ? WHERE id = ?', [first_name, last_name, provider_specialty, email, phone_number, req.session.providerId])
+        return res.status(200).json({ message: 'provider details updated successfully' })
     } catch (error) {
         console.error(error)
         return res.status(500).json({ message: 'Error updating details', error: error.message })
