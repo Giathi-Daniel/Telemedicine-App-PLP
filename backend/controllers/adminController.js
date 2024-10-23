@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const { validationResult } = require('express-validator')
 
 // register admin
-exports.registeradmin = async (req, res) => {
+exports.registerAdmin = async (req, res) => {
     const errors = validationResult(req) 
 
     if(!errors.isEmpty()) {
@@ -28,7 +28,7 @@ exports.registeradmin = async (req, res) => {
 }
 
 // Login
-exports.loginadmin = async (req, res) => {
+exports.loginAdmin = async (req, res) => {
     const { email, password } = req.body
 
     try {
@@ -59,7 +59,7 @@ exports.loginadmin = async (req, res) => {
 }
 
 // logout
-exports.logoutadmin = async (req, res) => {
+exports.logoutAdmin = async (req, res) => {
     req.session.destroy( 
         (err) => {
             if(err) {
@@ -72,7 +72,7 @@ exports.logoutadmin = async (req, res) => {
 }
 
 // get admin info
-exports.getadmin = async (req, res) => {
+exports.getAdmin = async (req, res) => {
     if(!req.session.adminId) {
         return res.status(401).json({ message: 'Unauthorized. Please log in' })
     }
@@ -93,7 +93,7 @@ exports.getadmin = async (req, res) => {
 }
 
 // edit admin
-exports.editadmin = async (req, res) => {
+exports.editAdmin = async (req, res) => {
     // check if the admin is logged in
     if(!req.session.adminId) {
         return res.status(401).json({ message: 'Unauthorized. Please login to continue.' })

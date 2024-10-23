@@ -29,7 +29,7 @@ app.use(session({
 }))
 
 // routes
-app.use('/telemedicine/api/patients', require('./routes/userRoutes.js'))
+app.use('/telemedicine/api/patients', require('./routes/patientRoutes'))
 app.use('/telemedicine/api/providers', require('./routes/providerRoutes.js'))
 app.use('/telemedicine/api/admin', require('./routes/adminRoutes.js'))
 
