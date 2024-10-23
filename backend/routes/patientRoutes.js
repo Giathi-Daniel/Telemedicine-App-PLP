@@ -1,39 +1,38 @@
-const express = require('express')
-const { registerUser, loginUser, logoutUser, getUser, editUser } = require('../controllers/userController')
-const { check } = require('express-validator') // validation
-const router = express.Router() // directing requests
+const express = require('express');
+const { checkRole } = require('../middleware/roleMiddleware');
+const { registerUser, loginUser, logoutUser, getUser, editUser } = require('../controllers/patientController');
+const { check } = require('express-validator'); // validation
+const router = express.Router(); // directing requests
 
-// register route
 router.post(
     '/register',
     [
-        check('first_name', 'Last is required').not().isEmpty(),
-        check('last_name', 'Last Name is required').not().isEmpty(),
+        check('first_name', 'First name is required').not().isEmpty(),
+        check('last_name', 'Last name is required').not().isEmpty(),
         check('email', 'Please provide a valid email').isEmail(),
-        check('date_of_birth', 'Please provide a valid email').not().isEmpty,
+        check('date_of_birth', 'Date of birth is required').not().isEmpty(),
         check('password', 'Password must be 6 characters or more').isLength({ min: 6 })
     ],
     registerUser
-)
+);
 
-// login
-router.post('/login', loginUser)
+router.post('/login', loginUser);
 
-// get user
-router.get('/profile', getUser)
+// Only patients should access their profile
+router.get('/profile', checkRole('patient'), getUser);
 
-// edit user
+// Edit patient details
 router.put(
-    '/edit', 
+    '/edit',
     [
+        checkRole('patient'),
         check('name', 'Name is required').not().isEmpty(),
         check('email', 'Please provide a valid email').isEmail(),
         check('password', 'Password must be 6 characters or more').isLength({ min: 6 })
     ],
     editUser
-)
+);
 
-// logout
-router.get('/logout', logoutUser)
+router.get('/logout', checkRole('patient'), logoutUser);
 
-module.exports = router
+module.exports = router;

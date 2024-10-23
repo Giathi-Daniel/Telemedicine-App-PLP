@@ -44,8 +44,11 @@ exports.loginProvider = async (req, res) => {
         }
 
         // create session
-        req.session.providerId = provider[0].id;
-        req.session.email = provider[0].email;
+        req.session.user = {
+            id: provider.id,
+            email: provider.email,
+            role: 'provider'
+        };
 
         res.redirect('/dashboard')
 

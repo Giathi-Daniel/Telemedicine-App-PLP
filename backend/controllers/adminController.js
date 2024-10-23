@@ -44,8 +44,11 @@ exports.loginadmin = async (req, res) => {
         }
 
         // create session
-        req.session.adminId = admin[0].id;
-        req.session.email = admin[0].email;
+        req.session.user = {
+            id: admin.id,
+            email: admin.email,
+            role: 'admin' 
+        };
 
         res.redirect('/dashboard')
 

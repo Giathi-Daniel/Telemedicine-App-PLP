@@ -46,8 +46,11 @@ exports.loginUser = async (req, res) => {
         }
 
         // create session
-        req.session.userId = user[0].id;
-        req.session.email = user[0].email;
+        req.session.user = {
+            id: user.id,
+            email: user.email,
+            role: 'patient' 
+        };
 
         // return res.status(200).json({ message: 'Successful login!' })
         res.redirect('/dashboard')
