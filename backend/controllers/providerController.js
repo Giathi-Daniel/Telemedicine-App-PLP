@@ -1,25 +1,16 @@
-const db = require('../config/db') // connect to db
-const bcrypt = require('bcryptjs') //hash passwords
-const { validationResult } = require('express-validator') // validation
+const db = require('../config/db')
+const bcrypt = require('bcryptjs')
+const { validationResult } = require('express-validator')
 
 // register user
 exports.registerProvider = async (req, res) => {
-    const errors = validationResult(req) //so that it can validate for us
-    // chech if any errors present in validation
+    const errors = validationResult(req) 
+
     if(!errors.isEmpty()) {
         return res.status(400).json({ message: 'Please correct input errors', errors: errors.array() })
     }
 
-    // fetch input parameters from the body
-    const { first_name, last_name, provider_specialty, email, password,phone_number, role } = req.body
-
-    if (role === 'patient') {
-        existingUser = await Patient.findOne({ where: { email } });
-    } else if (role === 'provider') {
-    existingUser = await Provider.findOne({ where: { email } });
-    } else if (role === 'admin') {
-    existingUser = await Admin.findOne({ where: { email } });
-    }
+    const { first_name, last_name, provider_specialty, email, password,phone_number } = req.body
 
     try {
         const [provider] = await db.execute('SELECT email FROM providers WHERE email = ?', [email])
@@ -27,9 +18,8 @@ exports.registerProvider = async (req, res) => {
             return res.status(404).json({ message: 'The user already exists' });
         }
 
-        // prepare our data
         const hashedPashword = await bcrypt.hash(password, 18)
-        await db.execute('INSERT INTO providers(first_name, last_name, provider_specialty, email, password,phone_number) VALUES (?,?,?,?,?,?)', [first_name, last_name, provider_specialty, email, password,phone_number])
+        await db.execute('INSERT INTO providers(first_name, last_name, provider_specialty, email, password,phone_number) VALUES (?,?,?,?,?,?)', [first_name, last_name, provider_specialty, email, hashedPashword, phone_number])
         return res.status(201).json({ message: 'New Doctor registered successfully ' })
     } catch(err) {
         console.error(err)
@@ -58,7 +48,6 @@ exports.loginProvider = async (req, res) => {
         req.session.name = provider[0].name;
         req.session.email = provider[0].email;
 
-        // return res.status(200).json({ message: 'Successful login!' })
         res.redirect('/dashboard')
 
     } catch(err){
@@ -108,13 +97,11 @@ exports.editProvider = async (req, res) => {
         return res.status(401).json({ message: 'Unauthorized. Please login to continue.' })
     }
 
-    const errors = validationResult(req) //so that it can validate for us
-    // chech if any errors present in validation
+    const errors = validationResult(req) 
     if(!errors.isEmpty()) {
         return res.status(400).json({ message: 'Please correct input errors', errors: errors.array() })
     }
 
-    // fetch user details from request body
     const { name, email, password } = req.body 
 
     const hashedPashword = await bcrypt.hash(password, 18)
@@ -126,5 +113,4 @@ exports.editProvider = async (req, res) => {
         console.error(error)
         return res.status(500).json({ message: 'Error updating details', error: error.message })
     }
-
 }
