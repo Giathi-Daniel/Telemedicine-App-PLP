@@ -30,6 +30,8 @@ app.use(session({
 
 // routes
 app.use('/telemedicine/api/patients', require('./routes/userRoutes.js'))
+app.use('/telemedicine/api/providers', require('./routes/providerRoutes.js'))
+app.use('/telemedicine/api/admin', require('./routes/adminRoutes.js'))
 
 // fetch for the html file
 app.get('*', (req, res) => {
@@ -39,6 +41,16 @@ app.get('*', (req, res) => {
 // Patient Dashboard
 app.get('/dashoard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/patient', 'dashboard.html'))
+})
+
+// Provider Dashboard
+app.get('/dashoard', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/doctor', 'dashboard.html'))
+})
+
+// Admin Dashboard
+app.get('/dashoard', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/admin', 'dashboard.html'))
 })
 
 const PORT =  process.env.PORT || 3200
