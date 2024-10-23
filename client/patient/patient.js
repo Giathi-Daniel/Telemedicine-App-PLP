@@ -9,7 +9,7 @@ document.getElementById('editForm').addEventListener('submit', async(e) => {
     const password = document.getElementById('editPassword').value
 
     // transmit data
-    const response = await fetch('/docucare/patient/edit', {
+    const response = await fetch('/telemedicine/api/patients/edit', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ document.getElementById('editForm').addEventListener('submit', async(e) => {
 
 // logout 
 logoutBtn.addEventListener('click', async () => {
-    const response = await fetch('/docucare/patient/logout', {
+    const response = await fetch('/telemedicine/api/patients/logout', {
         method: 'POST'
     })
 

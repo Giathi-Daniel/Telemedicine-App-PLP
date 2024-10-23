@@ -10,7 +10,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
   }
 
   // Send the login data to the backend
-  const response = await fetch("/login", {
+  const response = await fetch("/telemedicine/api/patients/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),

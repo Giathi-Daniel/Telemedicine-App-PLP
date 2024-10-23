@@ -22,99 +22,48 @@ span.addEventListener('click', function() {
 });
 });
 
-  // Handle Register
-  document.getElementById('register-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
+// Handle Register
+document.getElementById('register-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-    const role = document.getElementById('role-selection').getAttribute('data-selected-role');
-    const first_name = document.getElementById('first_name').value;
-    const last_name = document.getElementById('last_name').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    let date_of_birth = document.getElementById('date_of_birth') ? document.getElementById('date_of_birth').value : '';
-    let language = document.getElementById('language') ? document.getElementById('language').value : '';
-    let gender = document.getElementById('gender') ? document.getElementById('gender').value : '';
-    let specialty = document.getElementById('specialty') ? document.getElementById('specialty').value : '';
+  const role = document.getElementById('role-selection').getAttribute('data-selected-role');
+  const first_name = document.getElementById('first_name').value;
+  const last_name = document.getElementById('last_name').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  let date_of_birth = document.getElementById('date_of_birth') ? document.getElementById('date_of_birth').value : '';
+  let language = document.getElementById('language') ? document.getElementById('language').value : '';
+  let gender = document.getElementById('gender') ? document.getElementById('gender').value : '';
+  let specialty = document.getElementById('specialty') ? document.getElementById('specialty').value : '';
 
-    // Validation (you can add more validation as necessary)
-    if (!role) {
-      return alert('Please select a role.');
-    }
+  if (!role) {
+    return alert('Please select a role.');
+  }
 
-    if (!first_name || !last_name || !email || !password) {
-      return alert('Please fill in all required fields.');
-    }
+  if (!first_name || !last_name || !email || !password) {
+    return alert('Please fill in all required fields.');
+  }
 
-    if (role === 'patient' && (!date_of_birth || !language || !gender)) {
-      return alert('Please fill in all patient-specific fields.');
-    }
+  if (role === 'patient' && (!date_of_birth || !language || !gender)) {
+    return alert('Please fill in all patient-specific fields.');
+  }
 
-    if (role === 'provider' && !specialty) {
-      return alert('Please provide your specialty.');
-    }
+  if (role === 'provider' && !specialty) {
+    return alert('Please provide your specialty.');
+  }
 
-    // Send the form data to the server (POST request)
-    const response = await fetch('/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ first_name, last_name, email, password, role, date_of_birth, language, gender, specialty }),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
-      alert('Registration successful!');
-      window.location.href = '/login';  // Redirect to login page
-    } else {
-      alert(data.message);  // Show error message
-    }
+  const response = await fetch('/telemedicine/api/patients/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ first_name, last_name, email, password, role, date_of_birth, language, gender, specialty }),
   });
 
+  const data = await response.json();
 
-   // Handle form submission
-   document.getElementById('register-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const role = document.getElementById('role-selection').getAttribute('data-selected-role');
-    const first_name = document.getElementById('first_name').value;
-    const last_name = document.getElementById('last_name').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    let date_of_birth = document.getElementById('date_of_birth') ? document.getElementById('date_of_birth').value : '';
-    let language = document.getElementById('language') ? document.getElementById('language').value : '';
-    let gender = document.getElementById('gender') ? document.getElementById('gender').value : '';
-    let specialty = document.getElementById('specialty') ? document.getElementById('specialty').value : '';
-
-    // Validation (you can add more validation as necessary)
-    if (!role) {
-      return alert('Please select a role.');
-    }
-
-    if (!first_name || !last_name || !email || !password) {
-      return alert('Please fill in all required fields.');
-    }
-
-    if (role === 'patient' && (!date_of_birth || !language || !gender)) {
-      return alert('Please fill in all patient-specific fields.');
-    }
-
-    if (role === 'provider' && !specialty) {
-      return alert('Please provide your specialty.');
-    }
-
-    // Send the form data to the server (POST request)
-    const response = await fetch('/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ first_name, last_name, email, password, role, date_of_birth, language, gender, specialty }),
-    });
-
-    const data = await response.json();
-    
-    if (response.ok) {
-      alert('Registration successful!');
-      window.location.href = '/login';  // Redirect to login page
-    } else {
-      alert(data.message);  // Show error message
-    }
-  });
+  if (response.ok) {
+    alert('Registration successful!');
+    window.location.href = '/login'; 
+  } else {
+    alert(data.message);  
+  }
+});

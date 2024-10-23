@@ -10,7 +10,7 @@ const path = require('path')
 const app = express()
 
 // middleware
-app.use(express.static(path.join(__dirname, '../client/test')))
+app.use(express.static(path.join(__dirname, '../client/index.html')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // capture form data
 
@@ -29,16 +29,16 @@ app.use(session({
 }))
 
 // routes
-app.use('/telemedicine/api/users', require('./routes/userRoutes.js'))
+app.use('/telemedicine/api/patients', require('./routes/userRoutes.js'))
 
 // fetch for the html file
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/test', 'index.html'))
+    res.sendFile(path.join(__dirname, '../client/', 'index.html'))
 })
 
-// Dashboard
+// Patient Dashboard
 app.get('/dashoard', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/test', 'dashboard.html'))
+    res.sendFile(path.join(__dirname, '../client/patient', 'dashboard.html'))
 })
 
 const PORT =  process.env.PORT || 3200

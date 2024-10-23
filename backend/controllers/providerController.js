@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs') //hash passwords
 const { validationResult } = require('express-validator') // validation
 
 // register user
-exports.registerUser = async (req, res) => {
+exports.registerProvider = async (req, res) => {
     const errors = validationResult(req) //so that it can validate for us
     // chech if any errors present in validation
     if(!errors.isEmpty()) {
@@ -11,18 +11,26 @@ exports.registerUser = async (req, res) => {
     }
 
     // fetch input parameters from the body
-    const { name, email, password } = req.body
+    const { first_name, last_name, provider_specialty, email, password,phone_number, role } = req.body
+
+    if (role === 'patient') {
+        existingUser = await Patient.findOne({ where: { email } });
+    } else if (role === 'provider') {
+    existingUser = await Provider.findOne({ where: { email } });
+    } else if (role === 'admin') {
+    existingUser = await Admin.findOne({ where: { email } });
+    }
 
     try {
-        const [user] = await db.execute('SELECT email FROM users WHERE email = ?', [email])
-        if(user.length > 0) {
+        const [provider] = await db.execute('SELECT email FROM providers WHERE email = ?', [email])
+        if(provider.length > 0) {
             return res.status(404).json({ message: 'The user already exists' });
         }
 
         // prepare our data
         const hashedPashword = await bcrypt.hash(password, 18)
-        await db.execute('INSERT INTO users(name, email, password) VALUES (?,?,?)', [name, email, hashedPashword])
-        return res.status(201).json({ message: 'New user registered successfully ' })
+        await db.execute('INSERT INTO providers(first_name, last_name, provider_specialty, email, password,phone_number) VALUES (?,?,?,?,?,?)', [first_name, last_name, provider_specialty, email, password,phone_number])
+        return res.status(201).json({ message: 'New Doctor registered successfully ' })
     } catch(err) {
         console.error(err)
         return res.status(500).json({message: 'An error occurred during registration', error: err.message })
@@ -30,12 +38,12 @@ exports.registerUser = async (req, res) => {
 }
 
 // Login
-exports.loginUser = async (req, res) => {
+exports.loginProvider = async (req, res) => {
     const { email, password } = req.body
 
     try {
-        const [user] = await db.execute('SELECT * FROM users WHERE email = ?', [email])
-        if(user.length === 0) {
+        const [provider] = await db.execute('SELECT * FROM users WHERE email = ?', [email])
+        if(provider.length === 0) {
             return res.status(404).json({ message: 'The user does not exist' });
         }
 
@@ -46,9 +54,9 @@ exports.loginUser = async (req, res) => {
         }
 
         // create session
-        req.session.userId = user[0].id;
-        req.session.name = user[0].name;
-        req.session.email = user[0].email;
+        req.session.userId = provider[0].id;
+        req.session.name = provider[0].name;
+        req.session.email = provider[0].email;
 
         // return res.status(200).json({ message: 'Successful login!' })
         res.redirect('/dashboard')
@@ -60,7 +68,7 @@ exports.loginUser = async (req, res) => {
 }
 
 // logout
-exports.logoutUser = async (req, res) => {
+exports.logoutProvider = async (req, res) => {
     req.session.destroy( 
         (err) => {
             if(err) {
@@ -73,8 +81,8 @@ exports.logoutUser = async (req, res) => {
 }
 
 // get user info
-exports.getUser = async (req, res) => {
-    if(!req.session.userId) {
+exports.getProvider = async (req, res) => {
+    if(!req.session.providerId) {
         return res.status(401).json({ message: 'Unauthorized. Please log in' })
     }
 
@@ -94,7 +102,7 @@ exports.getUser = async (req, res) => {
 }
 
 // edit user
-exports.editUser = async (req, res) => {
+exports.editProvider = async (req, res) => {
     // check if the user is logged in
     if(!req.session.userId) {
         return res.status(401).json({ message: 'Unauthorized. Please login to continue.' })
