@@ -52,7 +52,7 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     return alert('Please provide your specialty.');
   }
 
-  const response = await fetch('/telemedicine/api/patients/register', {
+  const response = await fetch('http://localhost:3200/telemedicine/api/patients/register', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ first_name, last_name, email, password, role, date_of_birth, language, gender, specialty }),

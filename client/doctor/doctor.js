@@ -1,3 +1,27 @@
+const messageDiv = document.getElementById('message')
+const userSection = document.getElementById('userSection')
+const userNameSpan = document.getElementById('userName')
+const userEmailSpan = document.getElementById('userEmail')
+const logoutBtn = document.getElementById('logoutButton')
+
+function showMessage(type, text) {
+    messageDiv.style.display = 'block'
+
+    if(type == 'success') {
+        messageDiv.style.backgroundColor = 'green'
+    } else {
+        messageDiv.style.backgroundColor = 'red'
+    }
+
+    messageDiv.style.color = 'white'
+    messageDiv.textContent = text //display the actual msg
+
+    setTimeout(() => {
+        messageDiv.style.display = 'none'
+    }, 3000) // hide the display button after 3 seconds
+}
+
+
 // edit details
 document.getElementById('editForm').addEventListener('submit', async(e) => {
     e.preventDefault()
