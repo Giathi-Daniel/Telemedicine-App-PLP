@@ -55,7 +55,6 @@ exports.loginUser = async (req, res) => {
 
         // create session
         req.session.userId = user[0].id;
-        req.session.name = user[0].name;
         req.session.email = user[0].email;
 
         // return res.status(200).json({ message: 'Successful login!' })
