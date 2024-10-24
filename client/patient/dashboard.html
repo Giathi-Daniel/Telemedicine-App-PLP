@@ -3,9 +3,210 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DocuCare | Patient</title>
+    <title>DocuCare | Patient Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Navbar styling */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        background-color: #007bff;
+        color: white;
+        padding: 1rem;
+      }
+
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+      }
+
+      .profile-icon {
+        cursor: pointer;
+      }
+
+      /* Sidebar styling */
+      .sidebar {
+        inline-size: 200px;
+        background-color: #f8f9fa;
+        padding: 15px;
+        position: fixed;
+        block-size: 100%;
+        inset-block-start: 0;
+        inset-inline-start: 0;
+      }
+
+      .sidebar a {
+        display: block;
+        color: #007bff;
+        padding: 10px 0;
+        text-decoration: none;
+      }
+
+      .sidebar a:hover {
+        background-color: #e9ecef;
+        color: #0056b3;
+      }
+
+      /* Main content area */
+      .main-content {
+        margin-inline-start: 220px;
+        padding: 20px;
+      }
+
+      /* Hero section */
+      .hero-section {
+        background-image: url("images/hero-image.jpg");
+        background-size: cover;
+        color: rgb(5, 4, 4);
+        padding: 100px;
+        text-align: center;
+        margin-block-end: 20px;
+      }
+
+      .hero-section h1 {
+        font-size: 2.5rem;
+        margin-block-end: 10px;
+      }
+
+      .appointments-section {
+        margin-block-end: 20px;
+      }
+
+      .logout-btn {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        margin-block-start: 20px;
+      }
+    </style>
   </head>
   <body>
-    <h2>Welcome to patient Dashboard</h2>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="logo">
+        <a href="#">DocuCare</a>
+      </div>
+      <div class="nav-links">
+        <a href="#">Dashboard</a>
+        <a href="#" id="profile-link">Profile</a>
+        <a href="#" id="logout-btn">Logout</a>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="#">Home</a>
+      <a href="#">Appointments</a>
+      <a href="#">Settings</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <h1>Welcome to Your Patient Dashboard</h1>
+        <p>Manage your appointments and view your profile here.</p>
+      </div>
+
+      <!-- Appointment Management Section -->
+      <div class="appointments-section">
+        <h2>Your Appointments</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="appointments-list">
+            <!-- Appointments will be dynamically populated from the database -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Logout Button -->
+      <button id="logout-btn" class="logout-btn">Logout</button>
+    </div>
+
+    <script>
+      // Profile click event
+      document
+        .getElementById("profile-link")
+        .addEventListener("click", function () {
+          window.location.href = "/patient/profile"; // Redirect to the profile page
+        });
+
+      // Logout functionality
+      document
+        .getElementById("logout-btn")
+        .addEventListener("click", async function () {
+          const response = await fetch(
+            "http://localhost:3200/telemedicine/api/logout",
+            { method: "POST" }
+          );
+          if (response.ok) {
+            window.location.href = "/"; // Redirect to main page after logout
+          } else {
+            alert("Failed to log out. Please try again.");
+          }
+        });
+
+      // Fetch and display appointments from the database (this part will depend on your backend)
+      async function fetchAppointments() {
+        const response = await fetch(
+          "http://localhost:3200/telemedicine/api/patient/appointments"
+        );
+        const appointments = await response.json();
+
+        const appointmentsList = document.getElementById("appointments-list");
+        appointmentsList.innerHTML = ""; // Clear existing appointments
+
+        appointments.forEach((appointment) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${appointment.date}</td>
+            <td>${appointment.time}</td>
+            <td>${appointment.status}</td>
+            <td>
+              <button onclick="updateAppointment(${appointment.id})">Update</button>
+              <button onclick="deleteAppointment(${appointment.id})">Cancel</button>
+            </td>
+          `;
+          appointmentsList.appendChild(row);
+        });
+      }
+
+      // Call the function to fetch appointments on page load
+      fetchAppointments();
+
+      // Function to update an appointment
+      function updateAppointment(id) {
+        window.location.href = `/patient/appointments/${id}/edit`; // Redirect to update page
+      }
+
+      // Function to delete an appointment
+      async function deleteAppointment(id) {
+        const response = await fetch(
+          `http://localhost:3200/telemedicine/api/patient/appointments/${id}`,
+          { method: "DELETE" }
+        );
+        if (response.ok) {
+          alert("Appointment canceled.");
+          fetchAppointments(); // Refresh appointments list
+        } else {
+          alert("Failed to cancel appointment.");
+        }
+      }
+    </script>
   </body>
 </html>
