@@ -12,12 +12,12 @@ const app = express()
 
 // middleware
 app.use(cors({
-    origin: ['http://127.0.0.1:5500', 'http://localhost:5500'],
+    origin: ['*'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     credentials: true 
 }));
 
-app.use(express.static(path.join(__dirname, '../client/index.html')))
+app.use(express.static(path.join(__dirname, '..', 'client')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // capture form data
 
@@ -36,29 +36,39 @@ app.use(session({
 }))
 
 // routes
-app.use('/telemedicine/api/patients', require('./routes/patientRoutes'))
-app.use('/telemedicine/api/providers', require('./routes/providerRoutes.js'))
-app.use('/telemedicine/api/admin', require('./routes/adminRoutes.js'))
+
 
 // fetch for the html file
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/', 'index.html'))
 })
 
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/', 'login.html'))
+})
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/', 'register.html'))
+})
+
 // Patient Dashboard
-app.get('/dashoard', (req, res) => {
+app.get('/patient/dashoard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/patient', 'dashboard.html'))
 })
 
 // Provider Dashboard
-app.get('/dashoard', (req, res) => {
+app.get('/doctor/dashoard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/doctor', 'dashboard.html'))
 })
 
 // Admin Dashboard
-app.get('/dashoard', (req, res) => {
+app.get('/admin/dashoard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/admin', 'dashboard.html'))
 })
+
+app.use('/telemedicine/api/patients', require('./routes/patientRoutes'))
+app.use('/telemedicine/api/providers', require('./routes/providerRoutes.js'))
+app.use('/telemedicine/api/admin', require('./routes/adminRoutes.js'))
 
 const PORT =  process.env.PORT || 3200
 

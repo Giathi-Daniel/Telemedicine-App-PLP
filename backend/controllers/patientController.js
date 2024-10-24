@@ -21,7 +21,8 @@ exports.registerUser = async (req, res) => {
 
         // prepare our data
         const hashedPashword = await bcrypt.hash(password, 18)
-        await db.execute('INSERT INTO patients(first_name, last_name, email, password,date_of_birth, language, gender, password) VALUES (?,?,?,?,?,?,?,?,?)', [first_name, last_name, email, date_of_birth, language, gender, hashedPashword])
+        await db.execute('INSERT INTO patients(first_name, last_name, password, email,date_of_birth, language, gender) VALUES (?,?,?,?,?,?,?)', 
+            [first_name, last_name, hashedPashword, email, date_of_birth, language, gender ])
         return res.status(201).json({ message: 'New user registered successfully ' })
     } catch(err) {
         console.error(err)
@@ -52,9 +53,7 @@ exports.loginUser = async (req, res) => {
             role: 'patient' 
         };
 
-        // return res.status(200).json({ message: 'Successful login!' })
-        res.redirect('/dashboard')
-
+        return res.status(200).json({ message: 'Successful login!' })
     } catch(err){
         console.error(err)
         return res.status(500).json({message: 'An error occurred during login', error: err.message })

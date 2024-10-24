@@ -23,26 +23,25 @@ document.querySelectorAll('#role-selection span').forEach((span) => {
   });
 });
 
-
 // Login
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  const role = document.querySelector('input[name="role"]:checked').value;
 
-  if (!email || !password || !role) {
+  // Change 'role' to 'selectedRole'
+  if (!email || !password || !selectedRole) {
     return showMessage('error', "Please enter email, password, and select a role.");
   }
 
   let loginUrl;
-  if (role === 'patient') {
-    loginUrl = 'http://localhost:3200/telemedicine/api/patients/login';
-  } else if (role === 'provider') {
-    loginUrl = 'http://localhost:3200/telemedicine/api/providers/login';
-  } else if (role === 'admin') {
-    loginUrl = 'http://localhost:3200/telemedicine/api/admin/login';
+  if (selectedRole === 'patient') {
+    loginUrl = '/telemedicine/api/patients/login';
+  } else if (selectedRole === 'provider') {
+    loginUrl = '/telemedicine/api/provider/login';
+  } else if (selectedRole === 'admin') {
+    loginUrl = '/telemedicine/api/admin/login';
   }
 
   const response = await fetch(loginUrl, {
@@ -55,7 +54,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
   if (response.ok) {
     showMessage('success', "Login successful!");
-    window.location.href = data.redirectUrl; 
+    window.location.href = '/patient/dashoard'; 
   } else {
     showMessage(data.message);
   }

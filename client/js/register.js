@@ -92,28 +92,36 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
   // Determine the correct API endpoint based on role
   let url = '';
   if (role === 'patient') {
-    url = 'http://localhost:3200/telemedicine/api/patients/register';
+    url = '/telemedicine/api/patients/register';
   } else if (role === 'provider') {
-    url = 'http://localhost:3200/telemedicine/api/providers/register';
+    url = '/telemedicine/api/providers/register';
   } else if (role === 'admin') {
-    url = 'http://localhost:3200/telemedicine/api/admin/register';
+    url = '/telemedicine/api/admin/register';
   }
 
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      first_name, last_name, email, password, role,
-      date_of_birth, language, gender, specialty 
-    })
-  });
+  console.log({url})
 
-  const data = await response.json();
-
-  if (response.ok) {
-    showMessage('success', 'Registration successful!');
-    window.location.href = '/login'; 
-  } else {
-    showMessage(data.message);
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        first_name, last_name, email, password, role,
+        date_of_birth, language, gender, specialty 
+      })
+    });
+  
+    const data = await response.json();
+    console.log({data})
+  
+    if (response.ok) {
+      showMessage('success', data.message);
+      window.location.href = '/login'; 
+    } else {
+      showMessage(data.message);
+    }
+  }
+  catch (err) {
+    console.error(err)
   }
 });
