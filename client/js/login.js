@@ -1,35 +1,51 @@
-const messageDiv = document.getElementById('message')
+const messageDiv = document.getElementById('message');
 
 function showMessage(type, text) {
-    messageDiv.style.display = 'block'
+  messageDiv.style.display = 'block';
+  messageDiv.style.backgroundColor = type === 'success' ? 'green' : 'red';
+  messageDiv.style.color = 'white';
+  messageDiv.textContent = text;
 
-    if(type == 'success') {
-        messageDiv.style.backgroundColor = 'green'
-    } else {
-        messageDiv.style.backgroundColor = 'red'
-    }
-
-    messageDiv.style.color = 'white'
-    messageDiv.textContent = text //display the actual msg
-
-    setTimeout(() => {
-        messageDiv.style.display = 'none'
-    }, 3000) // hide the display button after 3 seconds
+  setTimeout(() => {
+    messageDiv.style.display = 'none';
+  }, 3000);
 }
 
+let selectedRole = null;
+
+// Handle role selection
+document.querySelectorAll('#role-selection span').forEach((span) => {
+  span.addEventListener('click', function () {
+    document.querySelectorAll('#role-selection span').forEach((s) => s.classList.remove('selected'));
+    this.classList.add('selected');
+
+    selectedRole = this.getAttribute('data-role');
+  });
+});
+
+
+// Login
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   
-  // fetch data from the form
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
+  const role = document.querySelector('input[name="role"]:checked').value;
 
-  if (!email || !password) {
-    return alert("Please enter both email and password.");
+  if (!email || !password || !role) {
+    return showMessage('error', "Please enter email, password, and select a role.");
   }
 
-  // Send the login data to the backend
-  const response = await fetch("http://localhost:3200/telemedicine/api/patients/login", {
+  let loginUrl;
+  if (role === 'patient') {
+    loginUrl = 'http://localhost:3200/telemedicine/api/patients/login';
+  } else if (role === 'provider') {
+    loginUrl = 'http://localhost:3200/telemedicine/api/providers/login';
+  } else if (role === 'admin') {
+    loginUrl = 'http://localhost:3200/telemedicine/api/admin/login';
+  }
+
+  const response = await fetch(loginUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -38,9 +54,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
   const data = await response.json();
 
   if (response.ok) {
-    alert("Login successful!");
-    window.location.href = data.redirectUrl; // Redirect to the appropriate dashboard
+    showMessage('success', "Login successful!");
+    window.location.href = data.redirectUrl; 
   } else {
-    alert(data.message); // Show error message
+    showMessage(data.message);
   }
 });

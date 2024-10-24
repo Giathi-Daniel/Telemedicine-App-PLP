@@ -47,6 +47,15 @@
       </div>
       <div class="form__container">
         <form id="login-form" method="POST" action="/login">
+          <!-- Role Selection -->
+          <div id="role-selection">
+            <h4>Select your role:</h4>
+            <span data-role="patient" class="role-option">Patient</span>
+            <span data-role="provider" class="role-option">Provider</span>
+            <span data-role="admin" class="role-option">Admin</span>
+          </div>
+
+          <!-- FORM INPUTS -->
           <div>
             <input
               type="email"
@@ -65,6 +74,7 @@
               required
             />
           </div>
+
           <p>Do not have an account ? <a href="register.html">Sign up</a></p>
           <button type="submit">Login</button>
         </form>
