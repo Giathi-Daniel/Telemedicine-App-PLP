@@ -1,6 +1,7 @@
 // import neccessary packages
 const db = require('./config/db') // database conn
 const express = require('express') // web server
+const cors = require('cors')
 const bodyParser = require('body-parser') // capture form data
 const session = require('express-session');  // session-management
 const MySQLStore = require('express-mysql-session')(session); // session-management storage
@@ -10,6 +11,12 @@ const path = require('path')
 const app = express()
 
 // middleware
+app.use(cors({
+    origin: 'http://127.0.0.1:3200',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    credentials: true 
+}));
+
 app.use(express.static(path.join(__dirname, '../client/index.html')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // capture form data
@@ -57,5 +64,5 @@ const PORT =  process.env.PORT || 3200
 
 // start server
 app.listen(PORT, () => {
-    console.log(`Server is running at ${PORT}`)
+    console.log(`Server is running at http://localhost:${PORT}`)
 })
