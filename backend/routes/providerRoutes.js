@@ -9,7 +9,6 @@ router.post(
     '/register',
     allowRegistration,
     [
-        checkRole('provider'),
         check('first_name', 'First name is required').not().isEmpty(),
         check('last_name', 'Last name is required').not().isEmpty(),
         check('email', 'Please provide a valid email').isEmail(),

@@ -5,6 +5,7 @@ const { validationResult } = require("express-validator");
 // register provider
 exports.registerProvider = async (req, res) => {
   const errors = validationResult(req);
+  console.log(req.body)
 
   if (!errors.isEmpty()) {
     return res

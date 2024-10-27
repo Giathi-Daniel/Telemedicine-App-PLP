@@ -42,11 +42,11 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
   let loginUrl;
   if (selectedRole === "patient") {
-    loginUrl = "/telemedicine/api/patients/login";
+    loginUrl = "/api/patients/login";
   } else if (selectedRole === "provider") {
-    loginUrl = "/telemedicine/api/providers/login";
+    loginUrl = "/api/providers/login";
   } else if (selectedRole === "admin") {
-    loginUrl = "/telemedicine/api/admins/login";
+    loginUrl = "/api/admins/login";
   }
 
   const response = await fetch(loginUrl, {

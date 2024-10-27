@@ -5,6 +5,7 @@ const { validationResult } = require("express-validator"); // validation
 // register user
 exports.registerUser = async (req, res) => {
   const errors = validationResult(req); //so that it can validate for us
+  console.log(errors)
   // chech if any errors present in validation
   if (!errors.isEmpty()) {
     return res
@@ -22,6 +23,8 @@ exports.registerUser = async (req, res) => {
     language,
     gender,
   } = req.body;
+
+  console.log(req.body)
 
   try {
     const [user] = await db.execute(

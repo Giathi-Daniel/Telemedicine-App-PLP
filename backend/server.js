@@ -66,9 +66,9 @@ app.get('/admin/dashoard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/admin', 'dashboard.html'))
 })
 
-app.use('/telemedicine/api/patients', require('./routes/patientRoutes'))
-app.use('/telemedicine/api/providers', require('./routes/providerRoutes.js'))
-app.use('/telemedicine/api/admins', require('./routes/adminRoutes.js'))
+app.use('/api/patients', require('./routes/patientRoutes'))
+app.use('/api/providers', require('./routes/providerRoutes.js'))
+app.use('/api/admins', require('./routes/adminRoutes.js'))
 
 const PORT =  process.env.PORT || 3200
 
