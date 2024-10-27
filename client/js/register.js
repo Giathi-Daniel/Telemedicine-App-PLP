@@ -96,7 +96,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
   } else if (role === 'provider') {
     url = '/telemedicine/api/providers/register';
   } else if (role === 'admin') {
-    url = '/telemedicine/api/admin/register';
+    url = '/telemedicine/api/admins/register';
   }
 
   console.log({url})
@@ -112,7 +112,7 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
     });
   
     const data = await response.json();
-    console.log({data})
+    showMessage({data})
   
     if (response.ok) {
       showMessage('success', data.message);

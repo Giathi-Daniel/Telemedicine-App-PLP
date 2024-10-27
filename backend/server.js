@@ -68,7 +68,7 @@ app.get('/admin/dashoard', (req, res) => {
 
 app.use('/telemedicine/api/patients', require('./routes/patientRoutes'))
 app.use('/telemedicine/api/providers', require('./routes/providerRoutes.js'))
-app.use('/telemedicine/api/admin', require('./routes/adminRoutes.js'))
+app.use('/telemedicine/api/admins', require('./routes/adminRoutes.js'))
 
 const PORT =  process.env.PORT || 3200
 

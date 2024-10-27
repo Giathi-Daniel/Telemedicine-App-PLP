@@ -14,4 +14,8 @@ const checkRole = (requiredRole) => {
     };
 };
 
-module.exports = { checkRole };
+const allowRegistration = (req, res, next) => {
+    return next(); 
+};
+
+module.exports = { checkRole, allowRegistration };

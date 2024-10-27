@@ -1,14 +1,15 @@
 const express = require('express');
-const { checkRole } = require('../middleware/roleMiddleware');
+const { checkRole, allowRegistration } = require('../middleware/roleMiddleware');
 const { registerProvider, loginProvider, logoutProvider, getProvider, editProvider } = require('../controllers/providerController');
-const { check } = require('express-validator'); // validation
-const router = express.Router(); // directing requests
+const { check } = require('express-validator');
+const router = express.Router(); 
 
 // Register provider route
 router.post(
     '/register',
+    allowRegistration,
     [
-        checkRole('admin'), // Only admins should register providers
+        checkRole('provider'),
         check('first_name', 'First name is required').not().isEmpty(),
         check('last_name', 'Last name is required').not().isEmpty(),
         check('email', 'Please provide a valid email').isEmail(),

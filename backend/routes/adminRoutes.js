@@ -1,5 +1,5 @@
 const express = require('express');
-const { checkRole } = require('../middleware/roleMiddleware');
+const { checkRole, allowRegistration } = require('../middleware/roleMiddleware');
 const { registerAdmin, loginAdmin, logoutAdmin, getAdmin, editAdmin } = require('../controllers/adminController');
 const { check } = require('express-validator'); // validation
 const router = express.Router(); // directing requests
@@ -7,6 +7,7 @@ const router = express.Router(); // directing requests
 // Admin routes with role check middleware
 router.post(
     '/register', 
+    allowRegistration,
     [
         checkRole('admin'), 
         check('first_name', 'First name is required').not().isEmpty(),
