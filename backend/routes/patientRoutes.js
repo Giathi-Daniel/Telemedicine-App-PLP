@@ -23,13 +23,13 @@ router.get('/profile', checkRole('patient'), getUser);
 
 // Edit patient details
 router.put(
-    '/edit',
-    [
+    '/edit', [
         checkRole('patient'),
-        check('name', 'Name is required').not().isEmpty(),
+        check('first_name', 'First name is required').not().isEmpty(),
+        check('last_name', 'Last name is required').not().isEmpty(),
         check('email', 'Please provide a valid email').isEmail(),
         check('password', 'Password must be 6 characters or more').isLength({ min: 6 })
-    ],
+    ], 
     editUser
 );
 
