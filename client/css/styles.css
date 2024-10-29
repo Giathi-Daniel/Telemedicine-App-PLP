@@ -454,6 +454,15 @@ a.active {
 
 
 
+/* ================== MESSAGE DIV ================== */
+#message {
+    position: absolute;
+    inset-block-start: 9rem;
+    inset-inline-end: 4rem;
+    max-inline-size: 100%;
+    padding: .1rem .5rem;
+}
+
 
 /* ================== FOOTER ================== */
 footer {

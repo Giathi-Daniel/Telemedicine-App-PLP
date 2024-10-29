@@ -8,7 +8,7 @@ function showMessage(type, text) {
 
   setTimeout(() => {
     messageDiv.style.display = "none";
-  }, 3000);
+  }, 5000);
 }
 
 document.querySelectorAll("#role-selection span").forEach((span) => {

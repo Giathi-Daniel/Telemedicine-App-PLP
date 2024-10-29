@@ -52,17 +52,17 @@ app.get('/register', (req, res) => {
 })
 
 // Patient Dashboard
-app.get('/patient/dashoard', (req, res) => {
+app.get('/patient/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/patient', 'dashboard.html'))
 })
 
 // Provider Dashboard
-app.get('/doctor/dashoard', (req, res) => {
+app.get('/provider/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/doctor', 'dashboard.html'))
 })
 
 // Admin Dashboard
-app.get('/admin/dashoard', (req, res) => {
+app.get('/admin/dashboard', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/admin', 'dashboard.html'))
 })
 
