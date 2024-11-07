@@ -1,6 +1,6 @@
 const express = require('express');
 const { checkRole, allowRegistration } = require('../middleware/roleMiddleware');
-const { registerProvider, loginProvider, logoutProvider, getProvider, editProvider } = require('../controllers/providerController');
+const { registerProvider, loginProvider, logoutProvider, getProvider, editProvider, dashboardProvider } = require('../controllers/providerController');
 const { check } = require('express-validator');
 const router = express.Router(); 
 
@@ -22,7 +22,7 @@ router.post(
 router.post('/login', loginProvider);
 
 // Only providers can access their profile
-router.get('/profile', checkRole('provider'), getProvider);
+router.get('/profile', checkRole("provider"), getProvider);
 
 // Edit provider details
 router.put(
@@ -37,5 +37,7 @@ router.put(
 );
 
 router.get('/logout', checkRole('provider'), logoutProvider);
+
+router.get('/dashboard', dashboardProvider);
 
 module.exports = router;

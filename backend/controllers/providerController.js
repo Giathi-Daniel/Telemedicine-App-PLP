@@ -1,6 +1,7 @@
 const db = require("../config/db");
 const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
+const path = require("path");
 
 // register provider
 exports.registerProvider = async (req, res) => {
@@ -80,8 +81,8 @@ exports.loginProvider = async (req, res) => {
 
     // create session
     req.session.user = {
-      id: provider.id,
-      email: provider.email,
+      id: provider[0].provider_id,
+      email: provider[0].email,
       role: "provider",
     };
 
@@ -111,24 +112,33 @@ exports.logoutProvider = async (req, res) => {
 };
 
 // get provider info
+
 exports.getProvider = async (req, res) => {
-  if (!req.session.providerId) {
+  // Check if the provider is logged in
+  if (req.session.user.role !== 'provider') {
     return res.status(401).json({ message: "Unauthorized. Please log in" });
   }
 
+  const email = req.session.user.email
+
   try {
+    // Fetch provider details from the database
     const [provider] = db.execute(
-      "SELECT first_name, last_name, provder_specialty, email FROM providers WHERE email = ?",
+      "SELECT first_name, last_name, provider_specialty, email FROM providers WHERE email = ?",
       [email]
     );
+
+    // If the provider does not exist, return a 404 status with a message//+
     if (provider.length === 0) {
       return res.status(404).json({ message: "The provider does not exist" });
     }
 
+    // If the provider exists, return a 200 status with a message and the provider details//+
     return res
       .status(200)
       .json({ message: "Details fetched for editing!", provider: provider[0] });
   } catch (err) {
+    // If there is a database error, log the error and return a 500 status with a message//+
     console.error(err);
     return res
       .status(500)
@@ -180,3 +190,11 @@ exports.editProvider = async (req, res) => {
       .json({ message: "Error updating details", error: error.message });
   }
 };
+
+exports.dashboardProvider = (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/doctor', 'dashboard.html'))
+}
+
+// app.get('/provider/dashboard', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/doctor', 'dashboard.html'))
+// })

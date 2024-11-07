@@ -46,7 +46,7 @@ function cancelAppointment(appointmentId) {
 function logout() {
     const confirmLogout = confirm("Are you sure you want to log out?");
     if (confirmLogout) {
-        fetch('/api/logout').then(() => {
+        fetch('/api/providers/logout').then(() => {
             window.location.href = '/';
         });
     } else {

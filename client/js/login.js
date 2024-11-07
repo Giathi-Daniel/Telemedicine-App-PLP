@@ -64,7 +64,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     if (selectedRole === "patient") {
       window.location.href = "/patient/dashboard";
     } else if (selectedRole === "provider") {
-      window.location.href = "/provider/dashboard";
+      window.location.href = "/api/providers/dashboard";
     } else if (selectedRole === "admin") {
       window.location.href = "/admin/dashboard";
     }
