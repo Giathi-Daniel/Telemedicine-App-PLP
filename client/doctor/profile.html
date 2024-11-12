@@ -4,28 +4,46 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
+    <link rel="stylesheet" href="/css/profile.css">
   </head>
   <body>
-    <div id="userSection" style="display: none">
+    <div id="userSection">
       <h3>User Information</h3>
-      <p><strong>Name: </strong><span id="userName"></span></p>
-      <p><strong>Email: </strong><span id="userEmail"></span></p>
+      <p><strong>Name: </strong><span id="userName">John Doe</span></p>
+      <p>
+        <strong>Email: </strong><span id="userEmail">johndoe@example.com</span>
+      </p>
+      <p>
+        <strong>Provider Specialty: </strong
+        ><span id="userSpecialty">Cardiology</span>
+      </p>
+
       <h3>Edit User Information</h3>
       <form action="" id="editForm">
         <label for="editFirstName">First Name:</label>
-        <input type="text" id="editName" />
+        <input type="text" id="editName" placeholder="Enter first name" />
         <label for="editLastName">Last Name:</label>
-        <input type="text" id="editLastName" />
+        <input type="text" id="editLastName" placeholder="Enter last name" />
+        <label for="editProviderSpecialty">Specialty:</label>
+        <input
+          type="text"
+          id="editProviderSpecialty"
+          placeholder="Enter specialty"
+        />
         <label for="editLanguage">Language:</label>
-        <input type="text" id="editLanguage" />
+        <input type="text" id="editLanguage" placeholder="Enter language" />
         <label for="editPassword">Password:</label>
-        <input type="password" id="editPassword" />
+        <input
+          type="password"
+          id="editPassword"
+          placeholder="Enter new password"
+        />
         <button type="submit">Update</button>
         <button type="reset">Cancel</button>
       </form>
-      <button type="submit" id="logoutButton">Logout</button>
+      <button id="logoutButton">Logout</button>
     </div>
 
-    <script src="doctor.js"></script>
+    <script src="/doctor/doctor-profile.js"></script>
   </body>
 </html>

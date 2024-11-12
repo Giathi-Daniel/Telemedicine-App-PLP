@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-block-size: 100vh;
+    padding: 20px;
+}
+
+#userSection {
+    inline-size: 100%;
+    max-inline-size: 500px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-block-end: 10px;
+    border-block-end: 2px solid #0073e6;
+    padding-block-end: 5px;
+}
+
+p {
+    font-size: 1rem;
+    color: #555;
+    margin-block-end: 10px;
+}
+
+strong {
+    color: #333;
+}
+
+form {
+    margin-block-start: 20px;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    color: #333;
+    margin-block-end: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    inline-size: 100%;
+    padding: 10px;
+    margin-block-end: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #0073e6;
+    box-shadow: 0 0 5px rgba(0, 115, 230, 0.2);
+}
+
+button[type="submit"],
+button[type="reset"],
+#logoutButton {
+    inline-size: 100%;
+    padding: 10px;
+    margin-block-start: 10px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #0073e6;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="reset"] {
+    background-color: #ccc;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
+
+#logoutButton {
+    background-color: #ff4c4c;
+}
+
+#logoutButton:hover {
+    background-color: #cc0000;
+}
+
+/* Responsive design */
+@media (max-inline-size: 600px) {
+    #userSection {
+        padding: 15px;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 0.9rem;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+}

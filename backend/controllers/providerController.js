@@ -120,10 +120,11 @@ exports.getProvider = async (req, res) => {
   }
 
   const email = req.session.user.email
+  // console.log(email)
 
   try {
     // Fetch provider details from the database
-    const [provider] = db.execute(
+    const [provider] = await db.execute(
       "SELECT first_name, last_name, provider_specialty, email FROM providers WHERE email = ?",
       [email]
     );
@@ -198,3 +199,8 @@ exports.dashboardProvider = (req, res) => {
 // app.get('/provider/dashboard', (req, res) => {
 //   res.sendFile(path.join(__dirname, '../client/doctor', 'dashboard.html'))
 // })
+
+exports.profileProvider = (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/doctor', 'profile.html'))
+  // res.send('Welcome to Provider Profile Page')
+}

@@ -1,6 +1,6 @@
 const express = require('express');
 const { checkRole, allowRegistration } = require('../middleware/roleMiddleware');
-const { registerProvider, loginProvider, logoutProvider, getProvider, editProvider, dashboardProvider } = require('../controllers/providerController');
+const { registerProvider, loginProvider, logoutProvider, getProvider, editProvider, dashboardProvider, profileProvider } = require('../controllers/providerController');
 const { check } = require('express-validator');
 const router = express.Router(); 
 
@@ -39,5 +39,7 @@ router.put(
 router.get('/logout', checkRole('provider'), logoutProvider);
 
 router.get('/dashboard', dashboardProvider);
+
+router.get('/view-profile', profileProvider);
 
 module.exports = router;
