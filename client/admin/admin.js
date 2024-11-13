@@ -47,7 +47,7 @@ async function addDoctor() {
     });
     closeDoctorForm();
     fetchTableData('doctors');
-}x
+}
 
 // Delete confirmation modal functions
 function openDeleteConfirmation(id, type) {

@@ -1,6 +1,6 @@
 const express = require('express');
 const { checkRole } = require('../middleware/roleMiddleware');
-const { registerUser, loginUser, logoutUser, getUser, editUser } = require('../controllers/patientController');
+const { registerUser, loginUser, logoutUser, getUser, editUser, profilePatient } = require('../controllers/patientController');
 const { check } = require('express-validator'); // validation
 const router = express.Router(); // directing requests
 
@@ -34,5 +34,6 @@ router.put(
 );
 
 router.get('/logout', checkRole('patient'), logoutUser);
+router.get('/view-profile', profilePatient);
 
 module.exports = router;

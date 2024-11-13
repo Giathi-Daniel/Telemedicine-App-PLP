@@ -1,6 +1,7 @@
 const db = require("../config/db"); // connect to db
 const bcrypt = require("bcryptjs"); //hash passwords
 const { validationResult } = require("express-validator"); // validation
+const path = require('path')
 
 // register user
 exports.registerUser = async (req, res) => {
@@ -83,7 +84,7 @@ exports.loginUser = async (req, res) => {
 
     // create session
     req.session.user = {
-      id: user.id,
+      id: user[0].patient_id,
       email: user.email,
       role: "patient",
     };
@@ -104,7 +105,7 @@ exports.getUser = async (req, res) => {
 
   try {
     const [user] = await db.execute(
-      "SELECT first_name, last_name, email FROM patients WHERE id = ?",
+      "SELECT first_name, last_name, email FROxM patients WHERE id = ?",
       [userId]
     );
     if (user.length === 0) {
@@ -172,3 +173,8 @@ exports.logoutUser = async (req, res) => {
     return res.status(201).json({ message: "Successfully loged out" });
   });
 };
+
+exports.profilePatient = (req, res) => {
+  res.sendFile(path.join(__dirname, '../../client/patient', 'profile.html'))
+  // res.send('Welcome to Provider Profile Page')
+}
