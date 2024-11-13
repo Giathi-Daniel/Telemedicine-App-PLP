@@ -1,3 +1,7 @@
+document.getElementById('doctorsTable').innerHTML = ''
+// fetch providers information and display it in the table
+getProviders()
+
 // Function to fetch and display doctors and patients
 async function fetchTableData(type) {
     const response = await fetch(`/api/${type}`);
@@ -8,21 +12,21 @@ async function fetchTableData(type) {
 // Render table function for doctors and patients
 function renderTable(data, type) {
     const tableBody = document.getElementById(`${type}Table`);
-    tableBody.innerHTML = '';
-    data.forEach(item => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td class="p-2 border-b">${item.id}</td>
-        <td class="p-2 border-b">${item.first_name}</td>
-        <td class="p-2 border-b">${item.last_name}</td>
-        <td class="p-2 border-b">${type === 'doctors' ? item.specialization : item.email}</td>
-        <td class="p-2 border-b">
-          <button onclick="edit${capitalize(type.slice(0, -1))}(${item.id})" class="text-blue-500">Edit</button>
-          <button onclick="openDeleteConfirmation(${item.id}, '${type}')" class="text-red-500 ml-2">Delete</button>
-        </td>
+      const tableData = `
+        <tr>
+            <td class="p-2 border-b">${data.provider_id}</td>
+            <td class="p-2 border-b">${data.first_name}</td>
+            <td class="p-2 border-b">${data.last_name}</td>
+            <td class="p-2 border-b">${data.provider_specialty}</td>
+            <td class="p-2 border-b">${data.email}</td>
+            <td class="p-2 border-b">${data.phone_number}</td>
+            <td class="p-2 border-b">
+            <button onclick="edit${(type.slice(0, -1))}(${data.provider_id})" class="text-blue-500">Edit</button>
+            <button onclick="openDeleteConfirmation(${data.provider_id}, '${type}')" class="text-red-500 ml-2">Delete</button>
+            </td>
+        </tr>
       `;
-      tableBody.appendChild(row);
-    });
+    tableBody.innerHTML += tableData; 
 }
 
 // Add doctor form and modal functions
@@ -37,17 +41,34 @@ function closeDoctorForm() {
 async function addDoctor() {
     const first_name = document.getElementById('first_name').value;
     const last_name = document.getElementById('last_name').value;
-    const specialty = document.getElementById('specialty').value;
+    const provider_specialty = document.getElementById('specialty').value;
     const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
     const phone_number = document.getElementById('phone_number').value;
-    await fetch('/api/providers', {
+    const response = await fetch('/api/providers/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ first_name, last_name, specialty, email, phone_number })
+        body: JSON.stringify({ first_name, last_name, password, provider_specialty, email, phone_number })
     });
+    const result = await response.json()
+    alert(result.message)
     closeDoctorForm();
     fetchTableData('doctors');
 }
+
+async function getProviders(){
+    const response = await fetch('/api/admins/providers')
+    const result = await response.json()
+    if(response.ok) {
+        const provider = result.provider
+        provider.forEach(data => {
+            renderTable(data, 'doctors')
+        })
+    } else {
+        alert(result.message)
+    }
+}
+
 
 // Delete confirmation modal functions
 function openDeleteConfirmation(id, type) {

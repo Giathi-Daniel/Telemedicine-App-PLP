@@ -19,6 +19,7 @@ router.post(
     registerProvider
 );
 
+
 router.post('/login', loginProvider);
 
 // Only providers can access their profile

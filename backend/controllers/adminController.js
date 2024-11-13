@@ -64,8 +64,8 @@ exports.loginAdmin = async (req, res) => {
 
     // create session
     req.session.user = {
-      id: admin.id,
-      email: admin.email,
+      id: admin[0].admin_id,
+      email: admin[0].email,
       role: "admin",
     };
 
@@ -163,5 +163,38 @@ exports.editAdmin = async (req, res) => {
     return res
       .status(500)
       .json({ message: "Error updating details", error: error.message });
+  }
+};
+
+// get providers
+exports.getProviders = async (req, res) => {
+  // Check if the provider is logged in
+  if (req.session.user.role !== 'admin') {
+    return res.status(401).json({ message: "Unauthorized. Please log in" });
+  }
+
+  try {
+    // Fetch provider details from the database
+    const [provider] = await db.execute(
+      "SELECT provider_id, first_name, last_name, provider_specialty, email, phone_number FROM providers");
+
+    // If the provider does not exist, return a 404 status with a message//+
+    if (provider.length === 0) {
+      return res.status(404).json({ message: "The provider does not exist" });
+    }
+    console.log(provider)
+    // If the provider exists, return a 200 status with a message and the provider details//+
+    return res
+      .status(200)
+      .json({ message: "Details fetched for editing!", provider: provider });
+  } catch (err) {
+    // If there is a database error, log the error and return a 500 status with a message//+
+    console.error(err);
+    return res
+      .status(500)
+      .json({
+        message: "An error occurred while fetching details",
+        error: err.message,
+      });
   }
 };

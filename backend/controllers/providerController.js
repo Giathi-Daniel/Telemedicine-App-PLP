@@ -6,9 +6,9 @@ const path = require("path");
 // register provider
 exports.registerProvider = async (req, res) => {
   const errors = validationResult(req);
-  console.log(req.body)
 
   if (!errors.isEmpty()) {
+    console.log(errors)
     return res
       .status(400)
       .json({ message: "Please correct input errors", errors: errors.array() });

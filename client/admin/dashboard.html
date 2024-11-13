@@ -128,30 +128,42 @@
             id="first_name"
             placeholder="First Name"
             class="w-full p-2 border rounded mb-2"
+            required
           />
           <input
             type="text"
             id="last_name"
             placeholder="Last Name"
             class="w-full p-2 border rounded mb-2"
+            required
           />
           <input
             type="text"
             id="specialty"
             placeholder="Specialization"
             class="w-full p-2 border rounded mb-2"
+            required
           />
           <input
             type="email"
             id="email"
             placeholder="Email Address"
             class="w-full p-2 border rounded mb-2"
+            required
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password"
+            class="w-full p-2 border rounded mb-2"
+            required
           />
           <input
             type="number"
             id="phone_number"
             placeholder="Phone Number"
             class="w-full p-2 border rounded mb-2"
+            required
           />
           <button
             type="button"
@@ -163,71 +175,6 @@
           <button
             type="button"
             onclick="closeDoctorForm()"
-            class="bg-gray-400 text-white px-4 py-2 rounded ml-2"
-          >
-            Cancel
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Patient Form Modal -->
-    <div id="patientFormModal" class="modal hidden">
-      <div class="modal-content bg-white p-4 rounded shadow-md">
-        <h3 class="text-lg font-semibold mb-2">Add Patient</h3>
-        <form id="patientForm">
-          <input
-            type="text"
-            id="patient_first_name"
-            placeholder="First Name"
-            class="w-full p-2 border rounded mb-2"
-          />
-          <input
-            type="text"
-            id="patient_last_name"
-            placeholder="Last Name"
-            class="w-full p-2 border rounded mb-2"
-          />
-          <input
-            type="password"
-            id="patient_password"
-            placeholder="Password"
-            class="w-full p-2 border rounded mb-2"
-          />
-          <input
-            type="email"
-            id="patient_email"
-            placeholder="Email Address"
-            class="w-full p-2 border rounded mb-2"
-          />
-          <input
-            type="date"
-            id="patient_dob"
-            placeholder="Date of Birth"
-            class="w-full p-2 border rounded mb-2"
-          />
-          <input
-            type="text"
-            id="patient_language"
-            placeholder="Language"
-            class="w-full p-2 border rounded mb-2"
-          />
-          <select id="patient_gender" class="w-full p-2 border rounded mb-2">
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-          <button
-            type="button"
-            onclick="addPatient()"
-            class="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            Save
-          </button>
-          <button
-            type="button"
-            onclick="closePatientForm()"
             class="bg-gray-400 text-white px-4 py-2 rounded ml-2"
           >
             Cancel
