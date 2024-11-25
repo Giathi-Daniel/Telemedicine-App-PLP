@@ -18,7 +18,7 @@ router.post(
 
 router.post('/login', loginUser);
 
-// Only patients should access their profile
+// Only patients access their profile
 router.get('/profile', checkRole('patient'), getUser);
 
 // Edit patient details
